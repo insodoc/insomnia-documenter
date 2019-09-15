@@ -7,6 +7,8 @@
   export let workspace;
 
   $: content = [ ...groups, ...requests ];
+  
+  let language;
 </script>
 
 <section class="content">
@@ -17,19 +19,19 @@
     <div class="right">
       <div class="language-selector">
         <span>Language:</span>
-        <select>
-          <option name="curl">cURL</option>
-          <option name="javascript">JavaScript (fetch)</option>
-          <option name="python">Python Requests</option>
-          <option name="node">Node.js (node-request)</option>
-          <option name="ruby">Ruby</option>
-          <option name="php">PHP</option>
-          <option name="golang">Go</option>
+        <select bind:value={language}>
+          <option value="curl">cURL</option>
+          <option value="javascript">JavaScript (fetch)</option>
+          <option value="python">Python Requests</option>
+          <option value="node">Node.js (node-request)</option>
+          <option value="ruby">Ruby</option>
+          <option value="php">PHP</option>
+          <option value="golang">Go</option>
         </select>
       </div>
     </div>
   </div>
-  <Rows content={content} {env} />
+  <Rows content={content} {env} {language} />
 </section>
 
 <style>

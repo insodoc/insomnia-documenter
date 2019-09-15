@@ -1,4 +1,5 @@
 @import './colors';
+@import 'highlight.js/scss/monokai';
 
 html, body {
   position: relative;
@@ -174,4 +175,9 @@ button {
       background: $options-request;
     }
   }
+}
+
+.hljs {
+  padding: 0;
+  background: transparent;
 }

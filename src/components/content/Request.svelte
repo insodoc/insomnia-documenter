@@ -1,8 +1,17 @@
 <script>
+  import hljs from 'highlight.js';
+  import ClipboardJS from 'clipboard';
+
   import applyEnv from '../../lib/applyEnv';
+  import generateCode from '../../lib/generateCode';
 
   export let request;
   export let env;
+  export let language = null;
+
+  let copyText = 'Copy to clipboard';
+  let copyButton;
+  let codeElement;
 
   $: reqData = {
     method: request.method,
@@ -10,6 +19,28 @@
     name: applyEnv(request.name, env),
     description: applyEnv(request.description, env)
   };
+
+  $: exampleCode = generateCode(request, reqData.url, language);
+
+  const code = document.createElement('code');
+  $: code.innerHTML = exampleCode;
+  $: hljs.highlightBlock(code);
+  $: exampleHTML = code.outerHTML;
+  
+  $: clipboard = copyButton && new ClipboardJS(copyButton, {
+    target: function () {
+      return codeElement;
+    }
+  });
+  $: clipboard && clipboard.on('success', function () {
+    copyText = 'Copied!';
+    setTimeout(() => copyText = 'Copy to Clipboard', 5000);
+  });
+  $: clipboard && clipboard.on('error', function (err) {
+    console.error(err);
+    copyText = 'Failed to copy :(';
+    setTimeout(() => copyText = 'Copy to Clipboard', 5000);
+  });
 </script>
 
 <div class="row">
@@ -23,7 +54,17 @@
 
     <hr />
   </div>
-  <div class="right"></div>
+  <div class="right">
+    <div class="code-example">
+      <div class="header">
+        <div class="title">Example request:</div>
+        <div class="copy">
+          <a href="javascript:;" bind:this={copyButton}>{copyText}</a>
+        </div>
+      </div>
+      <pre bind:this={codeElement}>{@html exampleHTML}</pre>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -32,5 +73,32 @@
     background: #e9e9e9;
     border: 1px solid #d4d4d4;
     border-radius: 2px;
+  }
+
+  .code-example .header {
+    display: flex;
+    justify-content: space-between;
+    background: #404040;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .code-example .header .title, .code-example .header .copy a {
+    padding: 8px 15px;
+  }
+
+  .code-example .header .copy a {
+    display: inline-block;
+    text-decoration: none !important;
+    color: #fff;
+    background: #333;
+  }
+
+  .code-example pre {
+    padding: 10px 15px;
+    border: 1px solid #404040;
+    border-top: 0;
+    margin: 0;
   }
 </style>

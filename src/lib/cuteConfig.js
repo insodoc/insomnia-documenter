@@ -43,7 +43,7 @@ class CuteConfig {
   }
 
   mapRequest(request) {
-    return pick(request, '_id', 'method', 'name', 'parameters', 'url', 'authentication', 'body', 'headers', '_type');
+    return pick(request, '_id', 'method', 'name', 'description', 'parameters', 'url', 'authentication', 'body', 'headers', '_type');
   }
 
   filterRequests(groupId = null) {
