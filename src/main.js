@@ -1,5 +1,5 @@
 import App from './App.svelte';
-import CuteConfig from './cuteConfig';
+import CuteConfig from './lib/cuteConfig';
 
 async function app() {
   const root = document.getElementById('app');

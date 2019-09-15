@@ -3,6 +3,9 @@
   import Content from './components/Content.svelte';
 
   export let config;
+
+  let envId = 0;
+  $: env = config.environments[envId];
 </script>
 
 <svelte:head>
@@ -13,9 +16,9 @@
   <h1 class="title">{config.workspace.name}</h1>
   <div class="environment">
     <span>Environment:</span>
-    <select>
-      {#each config.environments as environment}
-        <option>{environment.name}</option>
+    <select bind:value={envId}>
+      {#each config.environments as environment, idx}
+        <option value={idx}>{environment.name}</option>
       {/each}
     </select>
   </div>
@@ -23,10 +26,12 @@
 
 <section class="wrapper">
   <Sidebar config={config} />
-  <Content requests={config.requests} groups={config.groups} workspace={config.workspace} />
+  <Content requests={config.requests} groups={config.groups} workspace={config.workspace} {env} />
 </section>
 
-<style>
+<style type="scss" global>
+  @import './styles/main';
+
   header {
     position: fixed;
     top: 0;

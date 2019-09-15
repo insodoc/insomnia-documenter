@@ -1,0 +1,177 @@
+@import './colors';
+
+html, body {
+  position: relative;
+  width: 100%;
+}
+
+body {
+  color: #333;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: normal;
+  margin: 0;
+  padding: 10px 0;
+}
+
+hr {
+  border: none;
+  display: block;
+  height: 1px;
+  background: #e7e7e7;
+}
+
+a {
+  color: rgb(0,100,200);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+label {
+  display: block;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.4em;
+  margin: 0 0 0.5em 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+input:disabled {
+  color: #ccc;
+}
+
+input[type="range"] {
+  height: 0;
+}
+
+button {
+  color: #333;
+  background-color: #f4f4f4;
+  outline: none;
+
+  &:active {
+    background-color: #ddd;
+  }
+
+  &:focus {
+    background-color: #666;
+  }
+}
+
+.row {
+  display: flex;
+  height: 100%;
+}
+
+.left, .right {
+  width: 50%;
+  padding: 10px 15px;
+}
+
+.right {
+  background: #232323;
+  color: #fff;
+}
+
+.sidebar-list-link {
+  display: block;
+  padding: 5px 15px;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: #222;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  &:hover {
+    background: rgba(0, 0, 0, .05);
+    text-decoration: none;
+  }
+
+  &.expanded {
+    background: rgba(0, 0, 0, .1);
+  }
+
+  i, span, strong {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  i {
+    margin-right: 5px;
+  }
+
+  strong {
+    font-size: 11px;
+    margin-right: 5px;
+
+    &.get {
+      color: $get-request;
+    }
+
+    &.post {
+      color: $post-request;
+    }
+
+    &.patch {
+      color: $patch-request;
+    }
+
+    &.delete {
+      color: $delete-request;
+    }
+
+    &.options, &.head {
+      color: $options-request;
+    }
+  }
+}
+
+.request-title {
+  font-weight: 600;
+
+  strong {
+    display: inline-block;
+    padding: 5px 8px;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 3px;
+    margin-right: 10px;
+    font-size: 17px;
+
+    &.get {
+      background: $get-request;
+    }
+
+    &.post {
+      background: $post-request;
+    }
+
+    &.patch {
+      background: $patch-request;
+    }
+
+    &.delete {
+      background: $delete-request;
+    }
+
+    &.options, &.head {
+      background: $options-request;
+    }
+  }
+}

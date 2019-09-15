@@ -5,7 +5,7 @@
 </script>
 
 <aside>
-  <Group name={config.workspace.name} children={config.groups} requests={config.requests} expanded />
+  <Group name={config.workspace.name} children={config.groups} requests={config.requests} root={true} expanded />
 </aside>
 
 <style>
@@ -16,6 +16,8 @@
     top: 60px;
     left: 0;
     bottom: 0;
-    overflow-y: auto;
+    overflow: auto;
+    text-overflow: clip;
+    white-space: nowrap;
   }
 </style>

@@ -1,25 +1,17 @@
 <script>
+  import applyEnv from '../../lib/applyEnv';
+  import Request from './Request.svelte';
+  import Group from './Group.svelte';
+
   export let content;
+  export let env;
 </script>
 
 {#each content as row}
-  <div class="row">
-    <div class="left">
-      {#if row._type === 'request_group'}
-        <h2>{row.name}</h2>
-      {:else}
-        <h3><strong>{row.method}</strong> {row.name}</h3>
-      {/if}
-
-      {#if row.description}
-        <p>{row.description}</p>
-      {/if}
-      <hr />
-    </div>
-    <div class="right"></div>
-  </div>
-
-  {#if row._type === 'request_group'}
-    <svelte:self content={[ ...row.requests, ...row.children ]} />
+  {#if row._type === 'request'}
+    <Request request={row} {env} />
+  {:else}
+    <Group group={row} {env} />
+    <svelte:self content={[ ...row.requests, ...row.children ]} {env} />
   {/if}
 {/each}

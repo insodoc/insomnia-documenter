@@ -1,6 +1,8 @@
 <script>
-  export let name;
-  export let method;
+  export let request;
 </script>
 
-<div class="name"><strong>{method}</strong> {name}</div>
+<a href="#{request._id}" class="sidebar-list-link name">
+  <strong class={request.method.toLowerCase()}>{request.method}</strong>
+  <span>{request.name}</span>
+</a>

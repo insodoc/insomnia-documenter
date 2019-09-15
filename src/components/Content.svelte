@@ -1,6 +1,7 @@
 <script>
   import Rows from './content/Rows.svelte';
 
+  export let env;
   export let groups;
   export let requests;
   export let workspace;
@@ -28,7 +29,7 @@
       </div>
     </div>
   </div>
-  <Rows content={content} />
+  <Rows content={content} {env} />
 </section>
 
 <style>
