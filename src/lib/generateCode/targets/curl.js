@@ -8,7 +8,7 @@ export default function curl(url, req) {
   });
 
   if (req.authHeader) {
-    code += `  --header '${req.authHeader.name}: ${req.authHeader.value}\\\n`;
+    code += `  --header '${req.authHeader.name}: ${req.authHeader.value}' \\\n`;
   }
 
   if (req.cookies && req.cookies.length) {

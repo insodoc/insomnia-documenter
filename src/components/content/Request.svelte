@@ -1,5 +1,6 @@
 <script>
-  import hljs from 'highlight.js';
+  import hljs from '../../lib/highlight';
+
   import ClipboardJS from 'clipboard';
 
   import applyEnv from '../../lib/applyEnv';
@@ -24,7 +25,9 @@
   $: exampleCode = generateCode(request, reqData.url, language, cookiejars);
 
   const code = document.createElement('code');
-  $: code.innerHTML = exampleCode;
+  $: code.className = language;
+
+  $: code.textContent = exampleCode;
   $: hljs.highlightBlock(code);
   $: exampleHTML = code.outerHTML;
   

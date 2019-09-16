@@ -1,6 +1,7 @@
 import generateAuthHeader from './auth';
 
 import curl from './targets/curl';
+import javascript from './targets/javascript';
 
 class CodeGenerator {
   constructor(request, url, cookiejars) {
@@ -19,6 +20,8 @@ class CodeGenerator {
     switch (language) {
       case 'curl':
         return curl(this.url, this.request);
+      case 'javascript':
+        return javascript(this.url, this.request);
       default:
         return 'Not implemented yet...';
     }
