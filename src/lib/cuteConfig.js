@@ -22,7 +22,7 @@ class CuteConfig {
   }
 
   mapCookiejar(cookiejar) {
-    return pick(cookiejar, 'name');
+    return pick(cookiejar, 'name', 'cookies');
   }
 
   filterCookiejars() {

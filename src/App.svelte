@@ -26,7 +26,13 @@
 
 <section class="wrapper">
   <Sidebar config={config} />
-  <Content requests={config.requests} groups={config.groups} workspace={config.workspace} {env} />
+  <Content
+    requests={config.requests}
+    groups={config.groups}
+    workspace={config.workspace}
+    cookiejars={config.cookiejars}
+    {env}
+  />
 </section>
 
 <style type="scss" global>

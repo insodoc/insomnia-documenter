@@ -5,6 +5,7 @@
   export let groups;
   export let requests;
   export let workspace;
+  export let cookiejars;
 
   $: content = [ ...groups, ...requests ];
   
@@ -31,7 +32,7 @@
       </div>
     </div>
   </div>
-  <Rows content={content} {env} {language} />
+  <Rows content={content} {env} {language} {cookiejars} />
 </section>
 
 <style>

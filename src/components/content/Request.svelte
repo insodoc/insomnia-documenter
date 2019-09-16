@@ -8,6 +8,7 @@
   export let request;
   export let env;
   export let language = null;
+  export let cookiejars;
 
   let copyText = 'Copy to clipboard';
   let copyButton;
@@ -20,7 +21,7 @@
     description: applyEnv(request.description, env)
   };
 
-  $: exampleCode = generateCode(request, reqData.url, language);
+  $: exampleCode = generateCode(request, reqData.url, language, cookiejars);
 
   const code = document.createElement('code');
   $: code.innerHTML = exampleCode;
@@ -100,5 +101,6 @@
     border: 1px solid #404040;
     border-top: 0;
     margin: 0;
+    white-space: pre-wrap;
   }
 </style>
