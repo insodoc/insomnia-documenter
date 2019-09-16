@@ -1,13 +1,17 @@
 import buildUrl from '../helpers/buildUrl';
 
-function parseBody(mime, text) {
-  if (mime === 'application/json') {
-    return JSON.parse(text);
+function parseBody(mime, body) {
+  if (mime === 'application/json' && body.text) {
+    return JSON.parse(body.text);
+  }
+
+  if (mime === 'application/x-www-form-urlencoded') {
+    return body.params.map(p => `${encodeURIComponent(p.name)}=${encodeURIComponent(p.value)}`).join('&');
   }
 
   // xml to JS object conversion to be added
 
-  return text;
+  return body.text;
 }
 
 export default function javascript(url, req) {
@@ -56,8 +60,8 @@ export default function javascript(url, req) {
     opts.headers.cookie = req.cookies.map(cookie => `${encodeURIComponent(cookie.key)}=${encodeURIComponent(cookie.value)}`).join('; ');
   }
 
-  if (!hasForm && req.body && req.body.text) {
-    opts.body = parseBody(req.body.mimeType, req.body.text);
+  if (!hasForm && req.body && req.body.mimeType !== 'multipart/form-data') {
+    opts.body = parseBody(req.body.mimeType, req.body);
   }
 
   if (hasForm) {
