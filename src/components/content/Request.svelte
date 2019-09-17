@@ -2,6 +2,8 @@
   import hljs from '../../lib/highlight';
 
   import ClipboardJS from 'clipboard';
+  import showdown from 'showdown';
+  const markdown = new showdown.Converter();
 
   import applyEnv from '../../lib/applyEnv';
   import generateCode from '../../lib/generateCode';
@@ -50,6 +52,8 @@
     copyText = 'Failed to copy :(';
     setTimeout(() => copyText = 'Copy to Clipboard', 5000);
   });
+
+  $: description = reqData.description && markdown.makeHtml(reqData.description);
 </script>
 
 <div class="row">
@@ -57,21 +61,25 @@
     <h3 class="request-title" id={request._id}><strong class={request.method.toLowerCase()}>{request.method}</strong> {reqData.name}</h3>
     <pre class="url">{reqData.url}</pre>
     
-    {#if reqData.description}
-      <p>{reqData.description}</p>
+    {#if description}
+      <p>{@html description}</p>
     {/if}
 
-    {#if request.parameters && request.parameters.length}
-      <Table data={content.params()} />
-    {/if}
+    <div class="tables">
 
-    {#if (request.headers && request.headers.length) || (request.authentication && request.authentication.type)}
-      <Table data={content.headers()} />
-    {/if}
+      {#if request.parameters && request.parameters.length}
+        <Table data={content.params()} />
+      {/if}
 
-    {#if request.body && (request.body.text || request.body.params)}
-      <Table data={content.body()} />
-    {/if}
+      {#if (request.headers && request.headers.length) || (request.authentication && request.authentication.type)}
+        <Table data={content.headers()} />
+      {/if}
+
+      {#if request.body && (request.body.text || request.body.params)}
+        <Table data={content.body()} />
+      {/if}
+
+    </div>
 
     <hr />
   </div>

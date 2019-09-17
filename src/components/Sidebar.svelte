@@ -2,9 +2,10 @@
   import Group from './groups/Group.svelte';
 
   export let config;
+  export let visible;
 </script>
 
-<aside>
+<aside class:visible>
   <Group name={config.workspace.name} children={config.groups} requests={config.requests} root={true} expanded />
 </aside>
 
@@ -19,5 +20,9 @@
     overflow: auto;
     text-overflow: clip;
     white-space: nowrap;
+  }
+
+  aside.visible {
+    display: block;
   }
 </style>

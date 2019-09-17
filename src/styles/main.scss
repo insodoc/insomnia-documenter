@@ -188,3 +188,15 @@ button {
   padding: 10px;
   white-space: pre-wrap;
 }
+
+.tables .table:last-child {
+  border-bottom: none !important;
+}
+
+.hamburger-toggler {
+  display: none;
+}
+
+@media only screen and ( max-width: 1000px ) {
+  @import './responsive';
+}

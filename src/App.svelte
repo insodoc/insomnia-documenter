@@ -6,6 +6,12 @@
 
   let envId = 0;
   $: env = config.environments[envId];
+
+  let menuVisible = false;
+
+  function toggleHamburger() {
+    menuVisible = !menuVisible;
+  }
 </script>
 
 <svelte:head>
@@ -13,7 +19,13 @@
 </svelte:head>
 
 <header>
-  <h1 class="title">{config.workspace.name}</h1>
+  <div class="header-left">
+    <a href="javascript:;" class="hamburger-toggler" on:click='{toggleHamburger}'>
+      <i class="fa fa-bars"></i>
+    </a>
+
+    <h1 class="title">{config.workspace.name}</h1>
+  </div>
   <div class="environment">
     <span>Environment:</span>
     <select bind:value={envId}>
@@ -25,7 +37,7 @@
 </header>
 
 <section class="wrapper">
-  <Sidebar config={config} />
+  <Sidebar config={config} visible={menuVisible} />
   <Content
     requests={config.requests}
     groups={config.groups}
@@ -56,6 +68,15 @@
     margin: 0;
     font-size: 22px;
     font-weight: 600;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  header .hamburger-toggler {
+    vertical-align: middle;
+    font-size: 22px;
+    margin-right: 5px;
+    color: #000;
   }
 
   header .environment {

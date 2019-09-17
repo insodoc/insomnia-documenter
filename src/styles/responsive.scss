@@ -1,0 +1,39 @@
+aside {
+  display: none;
+}
+
+.content {
+  margin-left: 0 !important;
+}
+
+.row {
+  display: block;
+}
+
+.left, .right {
+  width: auto;
+}
+
+.right {
+  padding: 0;
+}
+
+.language-selector {
+  padding: 10px;
+}
+
+.language-selector select {
+  margin: 0;
+}
+
+header .environment span {
+  display: none;
+}
+
+header .title {
+  font-size: 18px !important;
+}
+
+.hamburger-toggler {
+  display: inline-block;
+}
