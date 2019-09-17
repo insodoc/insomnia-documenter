@@ -2,7 +2,6 @@
   "name": "insomnia-documenter",
   "version": "0.1.0",
   "description": "API documentation generator tool for Insomnia.",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jozsefsallai/insomnia-documenter.git"
@@ -14,6 +13,13 @@
     "documentation",
     "generator"
   ],
+  "bin": {
+    "insomnia-documenter": "./bin/generate"
+  },
+  "files": [
+    "/bin",
+    "/public"
+  ],
   "author": "@jozsefsallai",
   "license": "MIT",
   "bugs": {
@@ -21,6 +27,9 @@
   },
   "homepage": "https://github.com/jozsefsallai/insomnia-documenter#readme",
   "devDependencies": {
+    "clipboard": "^2.0.4",
+    "highlight.js": "^9.15.10",
+    "lodash.pick": "^4.4.0",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.18",
@@ -30,20 +39,21 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
+    "showdown": "^1.9.0",
+    "sirv-cli": "^0.4.4",
     "svelte": "^3.0.0",
     "svelte-preprocess": "^3.1.1"
   },
   "dependencies": {
-    "clipboard": "^2.0.4",
-    "highlight.js": "^9.15.10",
-    "lodash.pick": "^4.4.0",
-    "showdown": "^1.9.0",
-    "sirv-cli": "^0.4.4"
+    "commander": "^3.0.1",
+    "copy-dir": "^1.2.0",
+    "mkdirp": "^0.5.1"
   },
   "scripts": {
     "build": "rollup -c",
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
+    "prepack": "npm run build",
     "start": "sirv public --single",
     "start:dev": "sirv public --single --dev"
   }
