@@ -34,6 +34,16 @@ header .title {
   font-size: 18px !important;
 }
 
+header .logo {
+  margin-left: 0 !important;
+  padding: 5px 0 !important;
+}
+
+header .environment {
+  padding: 15px 5px !important;
+}
+
 .hamburger-toggler {
   display: inline-block;
+  padding: 15px;
 }

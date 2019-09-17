@@ -24,6 +24,10 @@
       <i class="fa fa-bars"></i>
     </a>
 
+    <div class="logo">
+      <img src="/logo.png" alt={config.workspace.name} />
+    </div>
+
     <h1 class="title">{config.workspace.name}</h1>
   </div>
   <div class="environment">
@@ -55,16 +59,17 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 15px 30px;
     border-bottom: 1px solid #dedede;
     background: #fff;
     z-index: 10000;
     display: flex;
     justify-content: space-between;
+    height: 60px;
+    overflow: hidden;
   }
 
   header .title {
-    padding: 0;
+    padding: 15px 10px;
     margin: 0;
     font-size: 22px;
     font-weight: 600;
@@ -75,12 +80,24 @@
   header .hamburger-toggler {
     vertical-align: middle;
     font-size: 22px;
-    margin-right: 5px;
     color: #000;
+  }
+
+  header .logo {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px;
+    margin-left: 30px;
+  }
+
+  header .logo img {
+    width: 48px;
+    height: 48px;
   }
 
   header .environment {
     font-size: 13px;
+    padding: 15px 30px;
   }
 
   header .environment select {
