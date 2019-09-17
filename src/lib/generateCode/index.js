@@ -13,6 +13,7 @@ class CodeGenerator {
     this.request = request;
     this.url = url;
     this.cookiejars = cookiejars;
+    this.code = null;
 
     this.request.cookies = this.appendCookies();
 
@@ -24,22 +25,31 @@ class CodeGenerator {
   generate(language) {
     switch (language) {
       case 'curl':
-        return curl(this.url, this.request);
+        this.code = curl;
+        break;
       case 'javascript':
-        return javascript(this.url, this.request);
+        this.code = javascript;
+        break;
       case 'python':
-        return python(this.url, this.request);
+        this.code = python;
+        break;
       case 'node':
-        return node(this.url, this.request);
+        this.code = node;
+        break;
       case 'ruby':
-        return ruby(this.url, this.request);
+        this.code = ruby;
+        break;
       case 'php':
-        return php(this.url, this.request);
+        this.code = php;
+        break;
       case 'golang':
-        return golang(this.url, this.request);
+        this.code = golang;
+        break;
       default:
         return 'Not implemented yet...';
     }
+
+    return this.code(this.url, this.request);
   }
 
   appendCookies() {
