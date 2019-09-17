@@ -5,6 +5,9 @@
 
   import applyEnv from '../../lib/applyEnv';
   import generateCode from '../../lib/generateCode';
+  import ContentGenerator from '../../lib/content';
+
+  import Table from './Table.svelte';
 
   export let request;
   export let env;
@@ -14,6 +17,8 @@
   let copyText = 'Copy to clipboard';
   let copyButton;
   let codeElement;
+
+  const content = new ContentGenerator(request);
 
   $: reqData = {
     method: request.method,
@@ -54,6 +59,18 @@
     
     {#if reqData.description}
       <p>{reqData.description}</p>
+    {/if}
+
+    {#if request.parameters && request.parameters.length}
+      <Table data={content.params()} />
+    {/if}
+
+    {#if (request.headers && request.headers.length) || (request.authentication && request.authentication.type)}
+      <Table data={content.headers()} />
+    {/if}
+
+    {#if request.body && (request.body.text || request.body.params)}
+      <Table data={content.body()} />
     {/if}
 
     <hr />

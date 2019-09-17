@@ -1,6 +1,6 @@
 export function getNTLMAuthHeader () {
   return {
-    name: 'Authentication',
+    name: 'Authorization',
     value: 'NTLM {{ntlm_token}}'
   };
 };
