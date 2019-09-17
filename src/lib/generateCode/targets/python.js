@@ -1,6 +1,4 @@
-function escape(str) {
-  return JSON.stringify(str).slice(1, -1);
-}
+import escape from '../helpers/escape';
 
 function parseBody(body) {
   const mime = body.mimeType;

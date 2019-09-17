@@ -1,4 +1,5 @@
 import buildUrl from '../helpers/buildUrl';
+import parseBody from '../helpers/parseBody';
 
 function getMethod(method) {
   switch (method) {
@@ -15,31 +16,6 @@ function getMethod(method) {
     default:
       return '{{METHOD}}';
   }
-}
-
-function escape(str) {
-  return JSON.stringify(str).slice(1, -1);
-}
-
-function parseBody(body) {
-  const mime = body.mimeType;
-
-  if (mime === 'application/x-www-form-urlencoded') {
-    return body.params.map(p => `${encodeURIComponent(p.name)}=${encodeURIComponent(p.value)}`).join('&');
-  }
-
-  if (mime === 'multipart/form-data') {
-    const boundary = '-----011000010111000001101001'; // api :)
-    const payload = body.params.map(p => {
-      return `${boundary}
-Content-Disposition: form-data; name="${p.name}"
-
-${p.value}`;
-    }).join('\n');
-    return `"${escape(payload)}\n${boundary}--"`;
-  }
-
-  return JSON.stringify(body.text);
 }
 
 export default function ruby(url, req) {

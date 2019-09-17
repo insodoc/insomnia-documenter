@@ -5,6 +5,8 @@ import javascript from './targets/javascript';
 import python from './targets/python';
 import node from './targets/node';
 import ruby from './targets/ruby';
+import php from './targets/php';
+import golang from './targets/golang';
 
 class CodeGenerator {
   constructor(request, url, cookiejars) {
@@ -31,6 +33,10 @@ class CodeGenerator {
         return node(this.url, this.request);
       case 'ruby':
         return ruby(this.url, this.request);
+      case 'php':
+        return php(this.url, this.request);
+      case 'golang':
+        return golang(this.url, this.request);
       default:
         return 'Not implemented yet...';
     }
