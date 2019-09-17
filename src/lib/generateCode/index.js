@@ -3,6 +3,7 @@ import generateAuthHeader from './auth';
 import curl from './targets/curl';
 import javascript from './targets/javascript';
 import python from './targets/python';
+import node from './targets/node';
 
 class CodeGenerator {
   constructor(request, url, cookiejars) {
@@ -25,6 +26,8 @@ class CodeGenerator {
         return javascript(this.url, this.request);
       case 'python':
         return python(this.url, this.request);
+      case 'node':
+        return node(this.url, this.request);
       default:
         return 'Not implemented yet...';
     }
