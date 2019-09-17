@@ -4,6 +4,7 @@ import curl from './targets/curl';
 import javascript from './targets/javascript';
 import python from './targets/python';
 import node from './targets/node';
+import ruby from './targets/ruby';
 
 class CodeGenerator {
   constructor(request, url, cookiejars) {
@@ -28,6 +29,8 @@ class CodeGenerator {
         return python(this.url, this.request);
       case 'node':
         return node(this.url, this.request);
+      case 'ruby':
+        return ruby(this.url, this.request);
       default:
         return 'Not implemented yet...';
     }
