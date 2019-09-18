@@ -12,6 +12,10 @@
   function toggleHamburger() {
     menuVisible = !menuVisible;
   }
+
+  const logoUrl = process.env.NODE_ENV === 'demo'
+    ? '/insomnia-documenter/logo.png'
+    : '/logo.png';
 </script>
 
 <svelte:head>
@@ -25,7 +29,7 @@
     </a>
 
     <div class="logo">
-      <img src="/logo.png" alt={config.workspace.name} />
+      <img src={logoUrl} alt={config.workspace.name} />
     </div>
 
     <h1 class="title">{config.workspace.name}</h1>

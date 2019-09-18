@@ -90,6 +90,11 @@ class CuteConfig {
 
     this.cute.cookiejars = this.filterCookiejars();
     this.cute.environments = this.filterEnvironments();
+
+    if (this.cute.environments.length > 1) {
+      this.cute.environments = this.cute.environments.slice(1);
+    }
+
     this.cute.groups = this.filterRootGroups();
     this.cute.requests = this.filterRequests();
 

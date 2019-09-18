@@ -3,7 +3,11 @@
 
   import ClipboardJS from 'clipboard';
   import showdown from 'showdown';
-  const markdown = new showdown.Converter();
+  const markdown = new showdown.Converter({
+    simplifiedAutoLink: true,
+    openLinksInNewWindow: true,
+    excludeTrailingPunctuationFromURLs: true
+  });
 
   import applyEnv from '../../lib/applyEnv';
   import generateCode from '../../lib/generateCode';
@@ -62,7 +66,7 @@
     <pre class="url">{reqData.url}</pre>
     
     {#if description}
-      <p>{@html description}</p>
+      <div class="description">{@html description}</div>
     {/if}
 
     <div class="tables">

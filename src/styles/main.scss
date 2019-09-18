@@ -129,6 +129,10 @@ button {
       color: $post-request;
     }
 
+    &.put {
+      color: $put-request;
+    }
+
     &.patch {
       color: $patch-request;
     }
@@ -154,6 +158,7 @@ button {
     border-radius: 3px;
     margin-right: 10px;
     font-size: 17px;
+    background: $options-request;
 
     &.get {
       background: $get-request;
@@ -163,6 +168,10 @@ button {
       background: $post-request;
     }
 
+    &.put {
+      background: $put-request;
+    }
+
     &.patch {
       background: $patch-request;
     }
@@ -170,16 +179,29 @@ button {
     &.delete {
       background: $delete-request;
     }
-
-    &.options, &.head {
-      background: $options-request;
-    }
   }
 }
 
 .hljs {
   padding: 0;
   background: transparent;
+}
+
+.description {
+  code, pre {
+    background: #eee;
+    text-shadow: 0 1px #fff;
+    padding: 0 .3em;
+    white-space: pre-wrap;
+  }
+
+  pre {
+    padding: 10px 15px;
+
+    code {
+      padding: 0;
+    }
+  }
 }
 
 .table pre {

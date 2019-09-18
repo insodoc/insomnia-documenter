@@ -3,8 +3,12 @@ import CuteConfig from './lib/cuteConfig';
 
 async function app() {
   const root = document.getElementById('app');
+
+  const url = process.env.NODE_ENV === 'demo'
+    ? '/insomnia-documenter/insomnia.json'
+    : '/insomnia.json';
   
-  const json = await fetch('/insomnia.json', {
+  const json = await fetch(url, {
     method: 'GET',
     credentials: 'same-origin',
     headers: {

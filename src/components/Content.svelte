@@ -1,6 +1,15 @@
 <script>
   import Rows from './content/Rows.svelte';
 
+  import applyEnv from '../lib/applyEnv';
+
+  import showdown from 'showdown';
+  const markdown = new showdown.Converter({
+    simplifiedAutoLink: true,
+    openLinksInNewWindow: true,
+    excludeTrailingPunctuationFromURLs: true
+  });
+
   export let env;
   export let groups;
   export let requests;
@@ -8,6 +17,7 @@
   export let cookiejars;
 
   $: content = [ ...groups, ...requests ];
+  $: description = workspace.description && markdown.makeHtml(applyEnv(workspace.description, env));
   
   let language;
 </script>
@@ -16,6 +26,9 @@
   <div class="row">
     <div class="left">
       <h1>{workspace.name}</h1>
+      {#if description}
+        <div class="description">{@html description}</div>
+      {/if}
     </div>
     <div class="right">
       <div class="language-selector">
