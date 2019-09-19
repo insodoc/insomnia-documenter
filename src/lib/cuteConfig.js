@@ -76,7 +76,7 @@ class CuteConfig {
     if (!filteredGroups) {
       return [];
     }
-  
+
     return filteredGroups
       .sort(this.metaSort)
       .map(this.deepMapGroups.bind(this));

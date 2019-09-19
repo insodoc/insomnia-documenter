@@ -7,18 +7,19 @@ async function app() {
   const url = process.env.NODE_ENV === 'demo'
     ? '/insomnia-documenter/insomnia.json'
     : '/insomnia.json';
-  
+
+  // eslint-disable-next-line no-undef
   const json = await fetch(url, {
     method: 'GET',
     credentials: 'same-origin',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     }
   }).then(res => res.json());
-  
+
   const insomniaConfig = new CuteConfig(json).generate();
-  
+
   return new App({
     target: root,
     props: {

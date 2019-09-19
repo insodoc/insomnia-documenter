@@ -70,6 +70,17 @@ npm run dev
 npm run build
 ```
 
+**Linting:**
+
+```sh
+npm run lint
+```
+
+**Testing:**
+```sh
+npm run test
+```
+
 ## License
 
 MIT.

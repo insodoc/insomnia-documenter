@@ -10,7 +10,9 @@ function parseBody(body) {
 
   if (mime === 'multipart/form-data') {
     const payload = {};
-    body.params.forEach(p => payload[p.name] = p.value);
+    body.params.forEach(p => {
+      payload[p.name] = p.value;
+    });
 
     return {
       key: 'formData',
@@ -20,7 +22,9 @@ function parseBody(body) {
 
   if (mime === 'application/x-www-form-urlencoded') {
     const payload = {};
-    body.params.forEach(p => payload[p.name] = p.value);
+    body.params.forEach(p => {
+      payload[p.name] = p.value;
+    });
 
     return {
       key: 'form',
@@ -35,7 +39,7 @@ function parseBody(body) {
 }
 
 export default function node(url, req) {
-  let code = `const request = require('request');\n\n`;
+  let code = 'const request = require(\'request\');\n\n';
   let hasCookies = false;
 
   if (req.cookies && req.cookies.length) {
@@ -50,21 +54,25 @@ export default function node(url, req) {
     code += '\n';
   }
 
-  code += `const options = {\n  `;
+  code += 'const options = {\n  ';
 
   const reqOptions = [];
   reqOptions.push(`method: '${req.method}'`);
   reqOptions.push(`url: '${url}'`);
 
   const qs = {};
-  req.parameters.forEach(p => qs[p.name] = p.value);
+  req.parameters.forEach(p => {
+    qs[p.name] = p.value;
+  });
 
   if (Object.keys(qs).length) {
     reqOptions.push(`qs: ${JSON.stringify(qs, null, 4).replace(/.$/, '  }')}`);
   }
 
   const headers = {};
-  req.headers.forEach(h => headers[h.name] = h.value);
+  req.headers.forEach(h => {
+    headers[h.name] = h.value;
+  });
 
   if (req.authHeader) {
     headers[req.authHeader.name] = req.authHeader.value;

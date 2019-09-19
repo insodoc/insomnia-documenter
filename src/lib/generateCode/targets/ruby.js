@@ -54,7 +54,7 @@ export default function ruby(url, req) {
 
   if (req.body) {
     const body = parseBody(req.body);
-    
+
     if (body) {
       code += `request.body = ${body}\n`;
     }

@@ -1,0 +1,21 @@
+{
+  "extends": "standard",
+  "plugins": [
+    "svelte3"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.svelte"],
+      "processor": "svelte3/svelte3"
+    }
+  ],
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never"
+    }],
+    "semi": ["error", "always"],
+    "prefer-promise-reject-errors": ["off"]
+  }
+}

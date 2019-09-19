@@ -31,7 +31,9 @@ export default function python(url, req) {
 
   if (req.parameters && req.parameters.length) {
     const params = {};
-    req.parameters.forEach(p => params[p.name] = p.value);
+    req.parameters.forEach(p => {
+      params[p.name] = p.value;
+    });
     code += `querystring = ${JSON.stringify(params)}\n`;
   }
 
@@ -42,11 +44,13 @@ export default function python(url, req) {
   }
 
   if (req.headers && req.headers.length) {
-    req.headers.forEach(h => headers[h.name] = h.value);
+    req.headers.forEach(h => {
+      headers[h.name] = h.value;
+    });
   }
 
   if (req.cookies && req.cookies.length) {
-    headers['cookie'] = req.cookies.map(cookie => `${encodeURIComponent(cookie.key)}=${encodeURIComponent(cookie.value)}`).join('; ');
+    headers.cookie = req.cookies.map(cookie => `${encodeURIComponent(cookie.key)}=${encodeURIComponent(cookie.value)}`).join('; ');
   }
 
   if (headers) {
@@ -59,7 +63,7 @@ export default function python(url, req) {
   }
 
   code += `\nresponse = requests.request('${req.method}', url, data=payload, headers=headers)\n`;
-  code += `print(response.text)`;
+  code += 'print(response.text)';
 
   return code;
 }

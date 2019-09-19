@@ -27,7 +27,7 @@ export default function golang(url, req) {
   let code = `package main
 
 import (
-  "fmt"${body ? '\n"strings"': ''}
+  "fmt"${body ? '\n"strings"' : ''}
   "net/http"
   "io/ioutil"
 )
@@ -37,12 +37,12 @@ func main() {
   `;
 
   code += `url := "${buildUrl(url, req)}"\n`;
-  
+
   if (body) {
     code += `  payload := strings.NewReader(${body})\n`;
   }
 
-  code += `  req, _ := http.NewRequest("${req.method}" url, ${body ? 'payload': 'nil'})\n\n`;
+  code += `  req, _ := http.NewRequest("${req.method}" url, ${body ? 'payload' : 'nil'})\n\n`;
 
   if (req.cookies && req.cookies.length) {
     const cookies = [];

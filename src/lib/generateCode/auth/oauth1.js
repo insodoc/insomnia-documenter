@@ -8,7 +8,7 @@ export function getOAuth1Header(opts) {
     tokenKey
   } = opts;
 
-  let value = `OAuth oauth_callback="${callback}",
+  const value = `OAuth oauth_callback="${callback}",
 oauth_consumer_key="${consumerKey}",
 oauth_nonce="${nonce || '{{oauth_nonce}}'}",
 oauth_signature="{{oauth_signature}}",

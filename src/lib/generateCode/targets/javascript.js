@@ -22,7 +22,7 @@ export default function javascript(url, req) {
     hasForm = true;
 
     code += 'const form = new FormData();\n';
-    
+
     req.body.params.forEach(param => {
       code += `form.append("${param.name}", "${param.value}");\n`;
     });
@@ -32,7 +32,7 @@ export default function javascript(url, req) {
 
   code += `fetch("${buildUrl(url, req)}", `;
 
-  let opts = {
+  const opts = {
     method: req.method
   };
 

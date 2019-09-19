@@ -27,11 +27,21 @@
   },
   "homepage": "https://github.com/jozsefsallai/insomnia-documenter#readme",
   "devDependencies": {
+    "chai": "^4.2.0",
     "clipboard": "^2.0.4",
     "cross-env": "^6.0.0",
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "highlight.js": "^9.15.10",
     "lodash.pick": "^4.4.0",
+    "mocha": "^6.2.0",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.18",
@@ -57,9 +67,11 @@
     "autobuild": "rollup -c -w",
     "demo": "cross-env NODE_ENV=demo npm run build && cp -r public/bundle.* docs/",
     "dev": "run-p start:dev autobuild",
+    "lint": "eslint src --ignore-pattern *.test.js",
     "prepack": "npm run build",
     "start": "sirv public --single",
     "start:demo": "node bin/demo",
-    "start:dev": "sirv public --single --dev"
+    "start:dev": "sirv public --single --dev",
+    "test": "mocha -r esm --recursive 'src/**/*.test.js'"
   }
 }
