@@ -7,6 +7,9 @@
   let envId = 0;
   $: env = config.environments[envId];
 
+  const jsonUrl = `${window.location.origin}/insomnia.json`;
+  const runInInsomniaLink = `https://insomnia.rest/run/?label=${encodeURIComponent(config.workspace.name)}&uri=${encodeURIComponent(jsonUrl)}`;
+
   let menuVisible = false;
 
   function toggleHamburger() {
@@ -34,13 +37,20 @@
 
     <h1 class="title">{config.workspace.name}</h1>
   </div>
-  <div class="environment">
-    <span>Environment:</span>
-    <select bind:value={envId}>
-      {#each config.environments as environment, idx}
-        <option value={idx}>{environment.name}</option>
-      {/each}
-    </select>
+  <div class="header-right">
+    <div class="run">
+      <a href={runInInsomniaLink} target="_blank">
+        <img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia" />
+      </a>
+    </div>
+    <div class="environment">
+      <span>Environment:</span>
+      <select bind:value={envId}>
+        {#each config.environments as environment, idx}
+          <option value={idx}>{environment.name}</option>
+        {/each}
+      </select>
+    </div>
   </div>
 </header>
 
@@ -59,6 +69,7 @@
   @import './styles/main';
 
   header {
+    box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
@@ -102,10 +113,17 @@
   header .environment {
     font-size: 13px;
     padding: 15px 30px;
+    display: inline-block;
+    vertical-align: middle;
   }
 
   header .environment select {
-  margin-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  header .run {
+    display: inline-block;
+    vertical-align: middle;
   }
 
   .wrapper {
