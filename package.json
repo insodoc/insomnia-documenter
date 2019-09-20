@@ -65,7 +65,7 @@
   "scripts": {
     "build": "rollup -c",
     "autobuild": "rollup -c -w",
-    "demo": "cross-env NODE_ENV=demo npm run build && cp -r public/bundle.* docs/",
+    "demo": "cross-env NODE_ENV=demo npm run build && cp -r public/bundle.* public/index.html docs/",
     "dev": "run-p start:dev autobuild",
     "lint": "eslint src --ignore-pattern *.test.js",
     "prepack": "npm run build",
