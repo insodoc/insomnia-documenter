@@ -83,8 +83,14 @@
     overflow: hidden;
   }
 
+  header .header-left, header .header-right {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   header .title {
-    padding: 15px 10px;
+    padding: 0 10px;
     margin: 0;
     font-size: 22px;
     font-weight: 600;
@@ -101,18 +107,20 @@
   header .logo {
     display: inline-block;
     vertical-align: middle;
-    padding: 5px;
+    padding: 0 5px;
     margin-left: 30px;
-  }
-
-  header .logo img {
     width: 48px;
     height: 48px;
   }
 
+  header .logo img {
+    width: 100%;
+    height: 100%;
+  }
+
   header .environment {
     font-size: 13px;
-    padding: 15px 30px;
+    padding: 0 30px;
     display: inline-block;
     vertical-align: middle;
   }

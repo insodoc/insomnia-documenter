@@ -36,11 +36,15 @@ header .title {
 
 header .logo {
   margin-left: 0 !important;
-  padding: 5px 0 !important;
+  padding: 0 !important;
 }
 
 header .environment {
-  padding: 15px 5px !important;
+  padding: 0 5px !important;
+}
+
+header .run {
+  display: none !important;
 }
 
 .hamburger-toggler {
