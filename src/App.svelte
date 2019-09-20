@@ -7,7 +7,7 @@
   let envId = 0;
   $: env = config.environments[envId];
 
-  const jsonUrl = `${window.location.origin}/insomnia.json`;
+  const jsonUrl = window.location.origin + window.INSOMNIA_URL;
   const runInInsomniaLink = `https://insomnia.rest/run/?label=${encodeURIComponent(config.workspace.name)}&uri=${encodeURIComponent(jsonUrl)}`;
 
   let menuVisible = false;

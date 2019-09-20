@@ -3,10 +3,13 @@ import CuteConfig from './lib/cuteConfig';
 
 async function app() {
   const root = document.getElementById('app');
+  const rootPath = root.getAttribute('data-root') || '';
 
   const url = process.env.NODE_ENV === 'demo'
     ? '/insomnia-documenter/insomnia.json'
-    : '/insomnia.json';
+    : `${rootPath}/insomnia.json`;
+
+  window.INSOMNIA_URL = url;
 
   // eslint-disable-next-line no-undef
   const json = await fetch(url, {
