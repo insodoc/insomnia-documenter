@@ -41,7 +41,7 @@
   $: code.textContent = exampleCode;
   $: hljs.highlightBlock(code);
   $: exampleHTML = code.outerHTML;
-  
+
   $: clipboard = copyButton && new ClipboardJS(copyButton, {
     target: function () {
       return codeElement;
@@ -65,7 +65,7 @@
     <div class="anchor" id={request._id}>&nbsp;</div>
     <h3 class="request-title"><strong class={request.method.toLowerCase()}>{request.method}</strong> {reqData.name}</h3>
     <pre class="url">{reqData.url}</pre>
-    
+
     {#if description}
       <div class="description">{@html description}</div>
     {/if}
@@ -114,6 +114,7 @@
     background: #e9e9e9;
     border: 1px solid #d4d4d4;
     border-radius: 2px;
+    overflow-x: auto;
   }
 
   .code-example .header {

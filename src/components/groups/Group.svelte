@@ -14,12 +14,6 @@
 
 {#if !root}
 <a href="javascript:;" class="sidebar-list-link name" class:expanded on:click={toggle}>
-  {#if expanded}
-    <i class="fa fa-folder-open"></i>
-  {:else}
-    <i class="fa fa-folder"></i>
-  {/if}
-
   <span>{name}</span>
 </a>
 {/if}
@@ -36,6 +30,15 @@
 {/if}
 
 <style>
+  .sidebar-list-link::before {
+    font-family: FontAwesome;
+    content: "\f07b";
+  }
+
+  .sidebar-list-link.expanded::before {
+    content: "\f07c";
+  }
+
   ul {
     list-style-type: none;
     padding-inline-start: 15px;

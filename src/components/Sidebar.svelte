@@ -20,6 +20,7 @@
     overflow: auto;
     text-overflow: clip;
     white-space: nowrap;
+    z-index: 10001;
   }
 
   aside.visible {

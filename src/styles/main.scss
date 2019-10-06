@@ -81,8 +81,10 @@ button {
 }
 
 .left, .right {
-  width: 50%;
+  box-sizing: border-box;
   padding: 10px 15px;
+  flex: 0 0 50%;
+  min-width: 50%;
 }
 
 .right {
@@ -108,13 +110,13 @@ button {
     background: rgba(0, 0, 0, .1);
   }
 
-  i, span, strong {
+  &::before, span, strong {
     display: inline-block;
     vertical-align: middle;
   }
 
-  i {
-    margin-right: 5px;
+  &::before {
+    margin-right: 7px;
   }
 
   strong {
@@ -193,6 +195,7 @@ button {
     text-shadow: 0 1px #fff;
     padding: 0 .3em;
     white-space: pre-wrap;
+    overflow-wrap: break-word;
   }
 
   pre {
@@ -204,11 +207,24 @@ button {
   }
 }
 
+.language-selector .selectContainer {
+  transition: background 150ms linear;
+
+  &:hover {
+    background: #454545;
+  }
+
+  * {
+    cursor: pointer !important;
+  }
+}
+
 .table pre {
   margin: 0;
   background: #efefef;
   padding: 10px;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .tables .table:last-child {

@@ -1,6 +1,6 @@
 {
   "name": "insomnia-documenter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "API documentation generator tool for Insomnia.",
   "repository": {
     "type": "git",
@@ -55,7 +55,8 @@
     "showdown": "^1.9.0",
     "sirv-cli": "^0.4.4",
     "svelte": "^3.0.0",
-    "svelte-preprocess": "^3.1.1"
+    "svelte-preprocess": "^3.1.1",
+    "svelte-select": "^3.0.2"
   },
   "dependencies": {
     "commander": "^3.0.1",
