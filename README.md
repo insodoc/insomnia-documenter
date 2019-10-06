@@ -1,4 +1,4 @@
-# Insomnia Documenter
+![Insomnia Documenter](assets/logo.png)
 
 Like [Postman Documenter](https://www.getpostman.com/api-documentation-generator) but for [Insomnia](https://insomnia.rest)! With this tool you can generate beautiful API documentation pages using your Insomnia export file.
 
