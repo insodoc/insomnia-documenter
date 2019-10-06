@@ -1,6 +1,8 @@
 @import './colors';
 @import 'highlight.js/scss/monokai';
 
+@import 'font-awesome/scss/font-awesome';
+
 html, body {
   position: relative;
   width: 100%;
@@ -110,13 +112,13 @@ button {
     background: rgba(0, 0, 0, .1);
   }
 
-  i, span, strong {
+  &::before, span, strong {
     display: inline-block;
     vertical-align: middle;
   }
 
-  i {
-    margin-right: 5px;
+  &::before {
+    margin-right: 7px;
   }
 
   strong {

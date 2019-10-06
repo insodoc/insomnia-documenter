@@ -60,6 +60,7 @@
   "dependencies": {
     "commander": "^3.0.1",
     "copy-dir": "^1.2.0",
+    "font-awesome": "^4.7.0",
     "mkdirp": "^0.5.1",
     "svelte-select": "^3.0.2"
   },
