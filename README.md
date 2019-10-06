@@ -31,7 +31,7 @@ insomnia-documenter --config /path/to/insomnia/config.json
 Options:
   -c, --config <location>  Location of the exported Insomnia JSON config.
   -l, --logo <location>    Project logo location (48x48px PNG).
-  -o, --output <location>  Where to save the file (defaults to current working directory).    
+  -o, --output <location>  Where to save the file (defaults to current working directory).
   -h, --help               output usage information
 ```
 
@@ -62,6 +62,16 @@ with something like this:
 In this case, the app will pick up the `insomnia.json` file from the `/path/to/docs` directory. This gives you more flexibility over how you want to maintain your documentation page (for example, you can store the export file somewhere other than the root directory of the webpage). You should NOT put a trailing slash in the `data-root` property.
 
 Please note that setting this attribute will not affect the favicon and the logo of the page. They will still be loaded from the same directory where `index.html` is.
+
+## Running the Page Locally
+
+Opening the `index.html` file will fail to load in 99.9% of cases because that's just how fetch works. To preview the page locally, you might want to use a tool such as [zeit/serve](https://github.com/zeit/serve):
+
+```sh
+npx serve
+```
+
+The page will be available at http://localhost:5000.
 
 ## Changelog
 
