@@ -59,11 +59,12 @@
 
   .table .row .name, .table .row .value {
     padding: 10px 0;
+    overflow-wrap: break-word;
   }
 
   .table .row .name {
     font-weight: 600;
-    width: 25%;
+    min-width: 25%;
   }
 
   .table .row .value {

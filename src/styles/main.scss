@@ -81,8 +81,10 @@ button {
 }
 
 .left, .right {
-  width: 50%;
+  box-sizing: border-box;
   padding: 10px 15px;
+  flex: 0 0 50%;
+  min-width: 50%;
 }
 
 .right {
@@ -193,6 +195,7 @@ button {
     text-shadow: 0 1px #fff;
     padding: 0 .3em;
     white-space: pre-wrap;
+    overflow-wrap: break-word;
   }
 
   pre {
@@ -209,6 +212,7 @@ button {
   background: #efefef;
   padding: 10px;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .tables .table:last-child {
