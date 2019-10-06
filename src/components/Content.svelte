@@ -10,6 +10,18 @@
     excludeTrailingPunctuationFromURLs: true
   });
 
+  import Select from 'svelte-select';
+
+  const languages = [
+    { value: 'curl', label: 'cURL' },
+    { value: 'javascript', label: 'JavaScript (fetch)' },
+    { value: 'python', label: 'Python (requests)' },
+    { value: 'node', label: 'Node.js (node-request)' },
+    { value: 'ruby', label: 'Ruby' },
+    { value: 'php', label: 'PHP' },
+    { value: 'golang', label: 'Go' }
+  ];
+
   export let env;
   export let groups;
   export let requests;
@@ -18,8 +30,9 @@
 
   $: content = [ ...groups, ...requests ];
   $: description = workspace.description && markdown.makeHtml(applyEnv(workspace.description, env));
-  
-  let language;
+
+  let selectedValue = languages[0];
+  $: language = selectedValue.value;
 </script>
 
 <section class="content">
@@ -32,16 +45,12 @@
     </div>
     <div class="right">
       <div class="language-selector">
-        <span>Language:</span>
-        <select bind:value={language}>
-          <option value="curl">cURL</option>
-          <option value="javascript">JavaScript (fetch)</option>
-          <option value="python">Python Requests</option>
-          <option value="node">Node.js (node-request)</option>
-          <option value="ruby">Ruby</option>
-          <option value="php">PHP</option>
-          <option value="golang">Go</option>
-        </select>
+        <Select
+          items={languages}
+          bind:selectedValue
+          isClearable={false}
+          isSearchable={false}
+        />
       </div>
     </div>
   </div>
@@ -57,11 +66,13 @@
     text-align: center;
   }
 
-  .language-selector select {
-    background: #555;
-    border: none;
-    color: #fff;
-    width: 80%;
-    margin-left: 10px;
+  .language-selector {
+    --background: #555;
+    --color: #fff;
+    --listBackground: #343434;
+    --itemHoverBG: #121212;
+    --itemIsActiveBG: #6a57d5;
+    --listMaxHeight: auto;
+    --border: none;
   }
 </style>

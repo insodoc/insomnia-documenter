@@ -207,6 +207,18 @@ button {
   }
 }
 
+.language-selector .selectContainer {
+  transition: background 150ms linear;
+
+  &:hover {
+    background: #454545;
+  }
+
+  * {
+    cursor: pointer !important;
+  }
+}
+
 .table pre {
   margin: 0;
   background: #efefef;
