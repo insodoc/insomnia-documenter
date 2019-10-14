@@ -235,6 +235,29 @@ button {
   display: none;
 }
 
+table {
+  background: #fff;
+  border: solid 1px #ddd;
+  margin-bottom: 1.25rem;
+  width: 100%;
+  border-collapse: collapse;
+
+  thead,
+  tfoot {
+    background: #f5f5f5;
+  }
+
+  th,
+  td {
+    color: #222222;
+    padding: 0.5rem;
+  }
+
+  tr:nth-of-type(even) {
+    background: #F9F9F9;
+  }
+}
+
 @media only screen and ( max-width: 1000px ) {
   @import './responsive';
 }

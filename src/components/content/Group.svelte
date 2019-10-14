@@ -5,7 +5,8 @@
   const markdown = new showdown.Converter({
     simplifiedAutoLink: true,
     openLinksInNewWindow: true,
-    excludeTrailingPunctuationFromURLs: true
+    excludeTrailingPunctuationFromURLs: true,
+    tables: true
   });
 
   export let group;

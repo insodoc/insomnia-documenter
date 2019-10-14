@@ -7,7 +7,8 @@
   const markdown = new showdown.Converter({
     simplifiedAutoLink: true,
     openLinksInNewWindow: true,
-    excludeTrailingPunctuationFromURLs: true
+    excludeTrailingPunctuationFromURLs: true,
+    tables: true
   });
 
   import Select from 'svelte-select';
