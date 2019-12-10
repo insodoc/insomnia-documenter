@@ -61,7 +61,7 @@ class CodeGenerator {
       }
 
       jar.cookies.forEach(cookie => {
-        if (this.url.includes(cookie.domain) && (cookie.path === '/' || this.url.includes(cookie.path))) {
+        if (this.url && this.url.includes(cookie.domain) && (cookie.path === '/' || this.url.includes(cookie.path))) {
           cookies.push({
             key: cookie.key,
             value: cookie.value
