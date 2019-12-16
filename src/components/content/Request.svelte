@@ -31,7 +31,8 @@
     method: request.method,
     url: applyEnv(request.url, env),
     name: applyEnv(request.name, env),
-    description: applyEnv(request.description, env)
+    description: applyEnv(request.description, env),
+    exampleResponse: applyEnv(request.exampleResponse, env)
   };
 
   $: exampleCode = generateCode(request, reqData.url, language, cookiejars);
@@ -42,6 +43,8 @@
   $: code.textContent = exampleCode;
   $: hljs.highlightBlock(code);
   $: exampleHTML = code.outerHTML;
+
+  $: exampleResponse = reqData.exampleResponse && hljs.highlightAuto(reqData.exampleResponse)
 
   $: clipboard = copyButton && new ClipboardJS(copyButton, {
     target: function () {
@@ -99,6 +102,14 @@
       </div>
       <pre bind:this={codeElement}>{@html exampleHTML}</pre>
     </div>
+    {#if reqData.exampleResponse}
+    <div class="code-example example-response">
+      <div class="header">
+        <div class="title">Example response:</div>
+      </div>
+      <pre>{@html exampleResponse.value}</pre>
+    </div>
+    {/if}
   </div>
 </div>
 
@@ -144,5 +155,17 @@
     border-top: 0;
     margin: 0;
     white-space: pre-wrap;
+  }
+
+  .example-response {
+    margin-top: 25px;
+  }
+
+  .example-response .header {
+    background: #675bc0;
+  }
+
+  .example-response pre {
+    border-color: #675bc0;
   }
 </style>

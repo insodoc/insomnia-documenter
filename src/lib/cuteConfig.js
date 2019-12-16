@@ -1,3 +1,4 @@
+import buildRequest from './buildRequest';
 import pick from 'lodash.pick';
 
 class CuteConfig {
@@ -42,16 +43,12 @@ class CuteConfig {
       .map(this.mapEnvironment);
   }
 
-  mapRequest(request) {
-    return pick(request, '_id', 'method', 'name', 'description', 'parameters', 'url', 'authentication', 'body', 'headers', '_type');
-  }
-
   filterRequests(groupId = null) {
     const parentId = groupId || this.id;
     return this.json.resources
       .filter(r => r._type === 'request' && r.parentId === parentId && !r.isPrivate)
       .sort(this.metaSort)
-      .map(this.mapRequest);
+      .map(buildRequest);
   }
 
   deepMapGroups(predicate) {
