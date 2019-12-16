@@ -1,6 +1,6 @@
 {
   "name": "insomnia-documenter",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "API documentation generator tool for Insomnia.",
   "repository": {
     "type": "git",
