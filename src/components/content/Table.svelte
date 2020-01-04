@@ -20,6 +20,11 @@
         <div class="name">{row.name}</div>
         <div class="value">{@html row.value}</div>
       </div>
+      {#if row.description}
+      <div class="row description">
+        {@html row.description}
+      </div>
+      {/if}
     {/each}
   {/if}
 </div>
@@ -69,5 +74,10 @@
 
   .table .row .value {
     width: 75%;
+  }
+
+  .table .row.description {
+    color: #787878;
+    margin-bottom: 10px;
   }
 </style>

@@ -24,7 +24,8 @@ class BodyParser {
     const rows = this.body.params.map(p => {
       return {
         name: p.name,
-        value: p.value
+        value: p.value,
+        description: p.description
       };
     });
 
@@ -67,7 +68,8 @@ class ContentGenerator {
     this.req.parameters.forEach(param => {
       rows.push({
         name: param.name,
-        value: param.value
+        value: param.value,
+        description: param.description
       });
     });
 
@@ -83,7 +85,8 @@ class ContentGenerator {
     this.req.headers.forEach(header => {
       rows.push({
         name: header.name,
-        value: header.value
+        value: header.value,
+        description: header.description
       });
     });
 
