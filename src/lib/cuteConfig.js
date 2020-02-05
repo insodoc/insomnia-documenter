@@ -19,7 +19,7 @@ class CuteConfig {
   }
 
   metaSort(a, b) {
-    return a.metaSortKey > b.metaSortKey;
+    return a.metaSortKey - b.metaSortKey;
   }
 
   mapCookiejar(cookiejar) {
