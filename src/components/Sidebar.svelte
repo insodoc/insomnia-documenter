@@ -1,12 +1,14 @@
 <script>
   import Group from './groups/Group.svelte';
 
-  export let config;
+  export let requests;
+  export let groups;
+  export let workspace;
   export let visible;
 </script>
 
 <aside class:visible>
-  <Group name={config.workspace.name} children={config.groups} requests={config.requests} root={true} expanded />
+  <Group name={workspace.name} children={groups} requests={requests} root={true} expanded />
 </aside>
 
 <style>

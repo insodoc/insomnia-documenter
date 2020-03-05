@@ -1,11 +1,14 @@
 <script>
   import Sidebar from './components/Sidebar.svelte';
   import Content from './components/Content.svelte';
+  import applyEnvForObject from './lib/applyEnvForObject';
 
   export let config;
 
   let envId = 0;
   $: env = config.environments[envId];
+  $: requests = applyEnvForObject(config.requests, config.environments[envId]);
+  $: groups = applyEnvForObject(config.groups, config.environments[envId]);
 
   const jsonUrl = window.location.origin + window.INSOMNIA_URL;
   const runInInsomniaLink = `https://insomnia.rest/run/?label=${encodeURIComponent(config.workspace.name)}&uri=${encodeURIComponent(jsonUrl)}`;
@@ -51,10 +54,10 @@
 </header>
 
 <section class="wrapper">
-  <Sidebar config={config} visible={menuVisible} />
+  <Sidebar requests={requests} groups={groups} workspace={config.workspace} visible={menuVisible} />
   <Content
-    requests={config.requests}
-    groups={config.groups}
+    requests={requests}
+    groups={groups}
     workspace={config.workspace}
     cookiejars={config.cookiejars}
     {env}
