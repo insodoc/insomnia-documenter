@@ -10,7 +10,6 @@
     tables: true
   });
 
-  import applyEnv from '../../lib/applyEnv';
   import generateCode from '../../lib/generateCode';
   import ContentGenerator from '../../lib/content';
 
@@ -25,14 +24,14 @@
   let copyButton;
   let codeElement;
 
-  const content = new ContentGenerator(request);
+  $: content = new ContentGenerator(request);
 
   $: reqData = {
     method: request.method,
-    url: applyEnv(request.url, env),
-    name: applyEnv(request.name, env),
-    description: applyEnv(request.description, env),
-    exampleResponse: applyEnv(request.exampleResponse, env)
+    url: request.url,
+    name: request.name,
+    description: request.description,
+    exampleResponse: request.exampleResponse
   };
 
   $: exampleCode = generateCode(request, reqData.url, language, cookiejars);

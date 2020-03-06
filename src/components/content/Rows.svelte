@@ -1,5 +1,4 @@
 <script>
-  import applyEnv from '../../lib/applyEnv';
   import Request from './Request.svelte';
   import Group from './Group.svelte';
 
