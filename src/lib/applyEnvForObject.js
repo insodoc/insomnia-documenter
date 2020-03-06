@@ -23,4 +23,3 @@ function replaceObjectValues(obj, env) {
     }
   });
 }
-
