@@ -11,7 +11,7 @@ export default function curl(url, req) {
   if (req.authHeader) {
     code += `  -H '${req.authHeader.name}: ${escape(req.authHeader.value)}' \\\n`;
   }
-  
+
   code += `  -X ${req.method} \\\n`;
 
   if (req.cookies && req.cookies.length) {

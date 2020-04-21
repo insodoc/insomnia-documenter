@@ -4,3 +4,4 @@ public/bundle.*
 public/insomnia.json
 .idea
 .vscode
+*.zip
