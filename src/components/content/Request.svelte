@@ -154,6 +154,7 @@
     border-top: 0;
     margin: 0;
     white-space: pre-wrap;
+    overflow-x: auto;
   }
 
   .example-response {
