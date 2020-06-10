@@ -4,6 +4,6 @@ export function getBasicAuthHeader(username = null, password = null) {
 
   return {
     name: 'Authorization',
-    value: authString
+    value: `Basic ${authString}`
   };
 };
