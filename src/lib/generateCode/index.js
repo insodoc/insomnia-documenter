@@ -3,7 +3,6 @@ import generateAuthHeader from './auth';
 import curl from './targets/curl';
 import javascript from './targets/javascript';
 import python from './targets/python';
-import node from './targets/node';
 import ruby from './targets/ruby';
 import php from './targets/php';
 import golang from './targets/golang';
@@ -34,8 +33,7 @@ class CodeGenerator {
         this.code = python;
         break;
       case 'node':
-        this.code = node;
-        break;
+        return `const fetch = require('node-fetch');\n\n${javascript(this.url, this.request)}`;
       case 'ruby':
         this.code = ruby;
         break;

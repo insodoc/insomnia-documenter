@@ -15,9 +15,9 @@
 
   const languages = [
     { value: 'curl', label: 'cURL' },
-    { value: 'javascript', label: 'JavaScript (fetch)' },
+    { value: 'javascript', label: 'JavaScript/Deno (fetch)' },
     { value: 'python', label: 'Python (requests)' },
-    { value: 'node', label: 'Node.js (node-request)' },
+    { value: 'node', label: 'Node.js (node-fetch)' },
     { value: 'ruby', label: 'Ruby' },
     { value: 'php', label: 'PHP' },
     { value: 'golang', label: 'Go' }
