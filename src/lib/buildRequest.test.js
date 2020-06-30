@@ -21,27 +21,61 @@ describe('buildRequest', function () {
     return expect(buildRequest(this.dummy)).to.deep.eql(this.dummy);
   });
 
-  it('should not return example if tags not present', function () {
-    const dummy = { ...this.dummy, description: 'Hello world' };
-    const request = buildRequest(dummy);
-
-    expect(request.exampleResponse).to.be.null;
-    return expect(request.description).to.eql(dummy.description);
-  });
-
-  it('should separate example from description if tags present', function () {
-    const description = `This is an example:
+  describe('example responses', function () {
+    beforeEach(function () {
+      const description = `This is an example:
 <!-- RESPONSE -->
-plaintext
+no status code
 <!-- ENDRESPONSE -->
-more text`;
-    const dummy = { ...this.dummy, description };
 
-    const request = buildRequest(dummy);
+more text goes here
 
-    expect(request.description).to.not.include(`<!-- RESPONSE -->
-plaintext
-<!-- ENDRESPONSE -->`);
-    return expect(request.exampleResponse).to.eql('plaintext');
+<!-- RESPONSE 200 -->
+response 200
+<!-- ENDRESPONSE -->
+
+even more text
+
+<!--RESPONSE 404    -->
+response 404
+<!--      ENDRESPONSE    -->`;
+
+      this.exampleResponseDummy = { ...this.dummy, description };
+    });
+
+    it('should not return example if tags not present', function () {
+      const dummy = { ...this.dummy, description: 'Hello world' };
+      const request = buildRequest(dummy);
+
+      expect(request.exampleResponses).to.have.length(0);
+      return expect(request.description).to.eql(dummy.description);
+    });
+
+    it('should extract example responses, regardless of tag spacing', function () {
+      const request = buildRequest(this.exampleResponseDummy);
+      return expect(request.exampleResponses).to.have.length(3);
+    });
+
+    it('should remove example responses from the description', function () {
+      const request = buildRequest(this.exampleResponseDummy);
+      return expect(request.description).to.eql('This is an example:\n\n\nmore text goes here\n\n\n\neven more text\n\n');
+    });
+
+    it('should return null for example response code if it was not provided', function () {
+      const request = buildRequest(this.exampleResponseDummy);
+      return expect(request.exampleResponses[0].code).to.be.null;
+    });
+
+    it('should return correct status codes when provided', function() {
+      const request = buildRequest(this.exampleResponseDummy);
+      expect(request.exampleResponses[1].code).to.eql('200');
+      return expect(request.exampleResponses[2].code).to.eql('404');
+    });
+
+    it('should return correct example', function () {
+      const request = buildRequest(this.exampleResponseDummy);
+      const values = request.exampleResponses.map(ex => ex.value);
+      return expect(values).to.deep.eql([ 'no status code', 'response 200', 'response 404' ]);
+    });
   });
 });

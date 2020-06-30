@@ -16,9 +16,10 @@ export default function (requestData) {
     return requestData;
   }
 
-  let exampleResponses = [];
+  const exampleResponses = [];
 
   let match;
+  // eslint-disable-next-line no-cond-assign
   while (match = reExampleResponse.exec(requestData.description)) {
     exampleResponses.push(makeExampleResponse(match));
   }
