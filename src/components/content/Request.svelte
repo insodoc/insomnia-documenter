@@ -31,7 +31,7 @@
     url: request.url,
     name: request.name,
     description: request.description,
-    exampleResponse: request.exampleResponse
+    exampleResponses: request.exampleResponses
   };
 
   $: exampleCode = generateCode(request, reqData.url, language, cookiejars);
@@ -42,8 +42,6 @@
   $: code.textContent = exampleCode;
   $: hljs.highlightBlock(code);
   $: exampleHTML = code.outerHTML;
-
-  $: exampleResponse = reqData.exampleResponse && hljs.highlightAuto(reqData.exampleResponse)
 
   $: clipboard = copyButton && new ClipboardJS(copyButton, {
     target: function () {
@@ -61,6 +59,27 @@
   });
 
   $: description = reqData.description && markdown.makeHtml(reqData.description);
+
+  function getClassForStatusCode(code) {
+    if (!code) {
+      return 'default';
+    }
+
+    switch (code[0]) {
+      case '1':
+        return 'info';
+      case '2':
+        return 'success';
+      case '3':
+        return 'redirect';
+      case '4':
+        return 'client-error';
+      case '5':
+        return 'server-error';
+      default:
+        return 'default';
+    }
+  }
 </script>
 
 <div class="row">
@@ -101,13 +120,15 @@
       </div>
       <pre bind:this={codeElement}>{@html exampleHTML}</pre>
     </div>
-    {#if reqData.exampleResponse}
-    <div class="code-example example-response">
-      <div class="header">
-        <div class="title">Example response:</div>
+    {#if reqData.exampleResponses && reqData.exampleResponses.length}
+      {#each reqData.exampleResponses as example}
+      <div class={'code-example example-response ' + getClassForStatusCode(example.code)}>
+        <div class="header">
+          <div class="title">Example response{ example.code && example.code.length ? ` - ${example.code}` : '' }:</div>
+        </div>
+        <pre>{@html hljs.highlightAuto(example.value).value}</pre>
       </div>
-      <pre>{@html exampleResponse.value}</pre>
-    </div>
+      {/each}
     {/if}
   </div>
 </div>
@@ -161,11 +182,51 @@
     margin-top: 25px;
   }
 
-  .example-response .header {
+  .example-response.default .header {
     background: #675bc0;
   }
 
-  .example-response pre {
+  .example-response.default pre {
     border-color: #675bc0;
+  }
+
+  .example-response.info .header {
+    background: #3949ab;
+  }
+
+  .example-response.info pre {
+    border-color: #3949ab;
+  }
+
+  .example-response.success .header {
+    background: #43a047;
+  }
+
+  .example-response.success pre {
+    border-color: #43a047;
+  }
+
+  .example-response.redirect .header {
+    background: #6d4c41;
+  }
+
+  .example-response.redirect pre {
+    border-color: #6d4c41;
+  }
+
+  .example-response.client-error .header {
+    background: #fb8c00;
+  }
+
+  .example-response.client-error pre {
+    border-color: #fb8c00;
+  }
+
+  .example-response.server-error .header {
+    background: #e53935;
+  }
+
+  .example-response.server-error pre {
+    border-color: #e53935;
   }
 </style>
