@@ -95,6 +95,12 @@ cd insomnia-documenter
 npm install
 ```
 
+**Copy the demo Insomnia export file:**
+
+```sh
+cp demo/insomnia.json public/insomnia.json
+```
+
 **Run a development build with hot reload:**
 
 ```sh
