@@ -122,12 +122,14 @@
     </div>
     {#if reqData.exampleResponses && reqData.exampleResponses.length}
       {#each reqData.exampleResponses as example}
-      <div class={'code-example example-response ' + getClassForStatusCode(example.code)}>
-        <div class="header">
-          <div class="title">Example response{ example.code && example.code.length ? ` - ${example.code}` : '' }:</div>
+        {#if example.value}
+        <div class={'code-example example-response ' + getClassForStatusCode(example.code)}>
+          <div class="header">
+            <div class="title">Example response{ example.code && example.code.length ? ` - ${example.code}` : '' }:</div>
+          </div>
+          <pre>{@html hljs.highlightAuto(example.value).value}</pre>
         </div>
-        <pre>{@html hljs.highlightAuto(example.value).value}</pre>
-      </div>
+        {/if}
       {/each}
     {/if}
   </div>
