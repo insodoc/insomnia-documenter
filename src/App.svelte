@@ -14,9 +14,15 @@
   const runInInsomniaLink = `https://insomnia.rest/run/?label=${encodeURIComponent(config.workspace.name)}&uri=${encodeURIComponent(jsonUrl)}`;
 
   let menuVisible = false;
+  let exampleVisible = (localStorage.getItem("show-examples") || 'true') == 'true';
 
   function toggleHamburger() {
     menuVisible = !menuVisible;
+  }
+
+  function toggleExample() {
+    exampleVisible = !exampleVisible;
+    localStorage.setItem("show-examples", exampleVisible);
   }
 </script>
 
@@ -50,10 +56,13 @@
         {/each}
       </select>
     </div>
+    <a href="javascript:;" class="example-toggler" class:inactive={!exampleVisible} on:click='{toggleExample}' title="Toggle request examples">
+      <i class="fa fa-code"></i>
+    </a>
   </div>
 </header>
 
-<section class="wrapper">
+<section class="wrapper" class:hide-right="{!exampleVisible}">
   <Sidebar requests={requests} groups={groups} workspace={config.workspace} visible={menuVisible} />
   <Content
     requests={requests}
