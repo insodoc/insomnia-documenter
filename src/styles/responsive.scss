@@ -12,6 +12,7 @@ aside {
 
 .left, .right {
   width: auto;
+  max-width: 100%;
 }
 
 .right {
@@ -43,7 +44,7 @@ header .environment {
   padding: 0 5px !important;
 }
 
-header .run {
+header .run, header .example-toggler {
   display: none !important;
 }
 

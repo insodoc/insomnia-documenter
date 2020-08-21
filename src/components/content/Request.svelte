@@ -12,6 +12,7 @@
 
   import generateCode from '../../lib/generateCode';
   import ContentGenerator from '../../lib/content';
+  import formatEnv from '../../lib/formatEnv';
 
   import Table from './Table.svelte';
 
@@ -28,13 +29,13 @@
 
   $: reqData = {
     method: request.method,
-    url: request.url,
+    url: formatEnv(request.url),
     name: request.name,
     description: request.description,
     exampleResponses: request.exampleResponses
   };
 
-  $: exampleCode = generateCode(request, reqData.url, language, cookiejars);
+  $: exampleCode = generateCode(request, request.url, language, cookiejars);
 
   const code = document.createElement('code');
   $: code.className = language;
@@ -86,7 +87,7 @@
   <div class="left">
     <div class="anchor" id={request._id}>&nbsp;</div>
     <h3 class="request-title"><strong class={request.method.toLowerCase()}>{request.method}</strong> {reqData.name}</h3>
-    <pre class="url">{reqData.url}</pre>
+    <pre class="url">{@html reqData.url}</pre>
 
     {#if description}
       <div class="description">{@html description}</div>
@@ -141,6 +142,7 @@
     position: relative;
     top: -60px;
     visibility: hidden;
+    height: 0;
   }
 
   pre.url {

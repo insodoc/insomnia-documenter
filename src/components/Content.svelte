@@ -61,6 +61,7 @@
 <style>
   .content {
     margin-left: 260px;
+    overflow-x: hidden;
   }
 
   .language-selector {

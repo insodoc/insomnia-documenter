@@ -1,4 +1,5 @@
 import generateAuthHeader from './generateCode/auth';
+import formatEnv from './formatEnv';
 
 class BodyParser {
   constructor(body) {
@@ -85,7 +86,7 @@ class ContentGenerator {
     this.req.headers.forEach(header => {
       rows.push({
         name: header.name,
-        value: header.value,
+        value: formatEnv(header.value),
         description: header.description
       });
     });
@@ -95,7 +96,7 @@ class ContentGenerator {
 
       rows.push({
         name: authHeader.name,
-        value: `<pre>${authHeader.value}</pre>`
+        value: `<pre>${formatEnv(authHeader.value)}</pre>`
       });
     }
 
