@@ -4,9 +4,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## 0.4.2 - 2020-10-05
+### Added
+- Table of Contents in the README
+- Notice about the [Insomnia Plugin](https://insomnia.rest/plugins/insomnia-plugin-documenter) by @devhammed
+
+### Changed
+- UI/UX: Highlight variables and implement example toggle button (thanks @macjuul)
+
+## 0.4.1 - 2020-08-09
 ### Fixed
-- Add mandatory `Basic ` prefix to `"Authorization"` header (thanks to @michaelbaudino)
+- Rendering error when the example response is empty or null.
+
+## 0.4.0 - 2020-06-30
+### Changed
+- Node.js example uses now fetch too
+- You can now specify multiple example responses with status code support
+
+### Fixed
+- Basic HTTP auth header generation (@michaelbaudino)
+
+## 0.3.4 - 2020-05-30
+### Changed
+- Use short options in curl (@ZeProf2Code)
+- Updated dependencies
+
+### Fixed
+- Horizontal scrolling in code example
+
+## 0.3.3 - 2020-04-06
+### Changed
+- Upgraded dependencies to resolve security vulnerabilities
+
+### Fixed
+- applyEnv regex error (@dingyaguang117)
+- Request order (@dingyaguang117)
+- applyEnv not replacing in every field (@aravindps)
 
 ## 0.3.2 - 2020-01-09
 ### Added

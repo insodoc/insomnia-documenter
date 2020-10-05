@@ -5,6 +5,23 @@ Like [Postman Documenter](https://www.getpostman.com/api-documentation-generator
 **Demo: https://jozsefsallai.github.io/insomnia-documenter**<br>
 **Tutorial and demo video: https://www.youtube.com/watch?v=pq2u3FqVVy8**
 
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+  - [Using `npx`](#using-npx)
+  - [By installing the package globally](#by-installing-the-package-globally)
+  - [Options](#options)
+  - [Using a GitHub Release](#using-a-github-release)
+- [Updating the API](#updating-the-api)
+- [Custom Root Paths](#custom-root-paths)
+- [Running the Page Locally](#running-the-page-locally)
+- [Insomnia Plugin](#insomnia-plugin)
+- [Changelog](#changelog)
+- [Contribution](#contribution)
+- [License](#license)
+- [Insomnia Documenter for enterprise](#insomnia-documenter-for-enterprise)
+
 ## Requirements
   * Node.js (8.x or higher is recommended)
   * An exported Insomnia workspace JSON (v4)
@@ -74,6 +91,10 @@ npx serve
 
 The page will be available at http://localhost:5000.
 
+## Insomnia Plugin
+
+[devhammed](https://github.com/devhammed) has made an awesome Insomnia Plugin that allows you to generate a documentation page directly from Insomnia's interface. **[Get The Plugin](https://insomnia.rest/plugins/insomnia-plugin-documenter)** ([npm](https://www.npmjs.com/package/insomnia-plugin-documenter) - [github](https://github.com/devhammed/insomnia-plugin-documenter))
+
 ## Changelog
 
 Please see the [Changelog document](https://github.com/jozsefsallai/insomnia-documenter/blob/master/CHANGELOG.md).
@@ -128,7 +149,7 @@ npm run test
 
 MIT.
 
-*Note: this project is not affiliated with Insomnia.*
+*Note: this project is not affiliated with Kong and/or Insomnia.*
 
 ## Insomnia Documenter for enterprise
 
