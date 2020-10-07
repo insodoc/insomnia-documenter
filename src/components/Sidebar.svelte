@@ -12,7 +12,7 @@
     background: #f6f6f6;
     width: 260px;
     position: fixed;
-    top: 70px;
+    top: 60px;
     left: 0;
     bottom: 0;
     overflow: auto;

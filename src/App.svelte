@@ -35,7 +35,7 @@
   header {
     box-sizing: border-box;
     position: fixed;
-    top: 10px;
+    top: 0;
     left: 0;
     right: 0;
     border-bottom: 1px solid #dedede;
@@ -100,17 +100,7 @@
   }
 
   .wrapper {
-    margin-top: 70px;
-  }
-
-  .header-bar {
-    color: #fff;
-    height: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000000;
+    margin-top: 60px;
   }
 </style>
 
@@ -118,8 +108,7 @@
   <title>{config.workspace.name}</title>
 </svelte:head>
 
-<div class="header-bar" style="background: {env.color};" />
-<header>
+<header style="border-top: 6px solid {env.color};">
   <div class="header-left">
     <a href="javascript:;" class="hamburger-toggler" on:click={toggleHamburger}>
       <i class="fa fa-bars" />
