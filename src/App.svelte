@@ -109,7 +109,7 @@
   <title>{config.workspace.name}</title>
 </svelte:head>
 
-<header style="border-top: 6px solid {color !== null ? color : 'transparent'};">
+<header style="border-top: 6px solid {color !== null ? color : '#6a57d5'};">
   <div class="header-left">
     <a href="javascript:;" class="hamburger-toggler" on:click={toggleHamburger}>
       <i class="fa fa-bars" />
