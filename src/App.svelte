@@ -1,20 +1,24 @@
 <script>
-  import Sidebar from './components/Sidebar.svelte';
-  import Content from './components/Content.svelte';
-  import applyEnvForObject from './lib/applyEnvForObject';
+  import Sidebar from "./components/Sidebar.svelte";
+  import Content from "./components/Content.svelte";
+  import applyEnvForObject from "./lib/applyEnvForObject";
 
   export let config;
 
   let envId = 0;
   $: env = config.environments[envId];
+  $: color = env.color;
   $: requests = applyEnvForObject(config.requests, config.environments[envId]);
   $: groups = applyEnvForObject(config.groups, config.environments[envId]);
 
   const jsonUrl = window.location.origin + window.INSOMNIA_URL;
-  const runInInsomniaLink = `https://insomnia.rest/run/?label=${encodeURIComponent(config.workspace.name)}&uri=${encodeURIComponent(jsonUrl)}`;
+  const runInInsomniaLink = `https://insomnia.rest/run/?label=${encodeURIComponent(
+    config.workspace.name
+  )}&uri=${encodeURIComponent(jsonUrl)}`;
 
   let menuVisible = false;
-  let exampleVisible = (localStorage.getItem("show-examples") || 'true') == 'true';
+  let exampleVisible =
+    (localStorage.getItem("show-examples") || "true") == "true";
 
   function toggleHamburger() {
     menuVisible = !menuVisible;
@@ -26,55 +30,8 @@
   }
 </script>
 
-<svelte:head>
-  <title>{config.workspace.name}</title>
-</svelte:head>
-
-<header>
-  <div class="header-left">
-    <a href="javascript:;" class="hamburger-toggler" on:click='{toggleHamburger}'>
-      <i class="fa fa-bars"></i>
-    </a>
-
-    <div class="logo">
-      <img src="logo.png" alt={config.workspace.name} />
-    </div>
-
-    <h1 class="title">{config.workspace.name}</h1>
-  </div>
-  <div class="header-right">
-    <div class="run">
-      <a href={runInInsomniaLink} target="_blank">
-        <img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia" />
-      </a>
-    </div>
-    <div class="environment">
-      <span>Environment:</span>
-      <select bind:value={envId}>
-        {#each config.environments as environment, idx}
-          <option value={idx}>{environment.name}</option>
-        {/each}
-      </select>
-    </div>
-    <a href="javascript:;" class="example-toggler" class:inactive={!exampleVisible} on:click='{toggleExample}' title="Toggle request examples">
-      <i class="fa fa-code"></i>
-    </a>
-  </div>
-</header>
-
-<section class="wrapper" class:hide-right="{!exampleVisible}">
-  <Sidebar requests={requests} groups={groups} workspace={config.workspace} visible={menuVisible} />
-  <Content
-    requests={requests}
-    groups={groups}
-    workspace={config.workspace}
-    cookiejars={config.cookiejars}
-    {env}
-  />
-</section>
-
 <style type="scss" global>
-  @import './styles/main';
+  @import "./styles/main";
 
   header {
     box-sizing: border-box;
@@ -91,7 +48,8 @@
     overflow: hidden;
   }
 
-  header .header-left, header .header-right {
+  header .header-left,
+  header .header-right {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -146,3 +104,58 @@
     margin-top: 60px;
   }
 </style>
+
+<svelte:head>
+  <title>{config.workspace.name}</title>
+</svelte:head>
+
+<header style="border-top: 6px solid {color !== null ? color : '#6a57d5'};">
+  <div class="header-left">
+    <a href="javascript:;" class="hamburger-toggler" on:click={toggleHamburger}>
+      <i class="fa fa-bars" />
+    </a>
+
+    <div class="logo">
+      <img src="logo.png" alt={config.workspace.name} />
+    </div>
+
+    <h1 class="title">{config.workspace.name}</h1>
+  </div>
+  <div class="header-right">
+    <div class="run">
+      <a href={runInInsomniaLink} target="_blank">
+        <img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia" />
+      </a>
+    </div>
+    <div class="environment">
+      <span>Environment:</span>
+      <select bind:value={envId}>
+        {#each config.environments as environment, idx}
+          <option value={idx}>{environment.name}</option>
+        {/each}
+      </select>
+    </div>
+    <a
+      href="javascript:;"
+      class="example-toggler"
+      class:inactive={!exampleVisible}
+      on:click={toggleExample}
+      title="Toggle request examples">
+      <i class="fa fa-code" />
+    </a>
+  </div>
+</header>
+
+<section class="wrapper" class:hide-right={!exampleVisible}>
+  <Sidebar
+    {requests}
+    {groups}
+    workspace={config.workspace}
+    visible={menuVisible} />
+  <Content
+    {requests}
+    {groups}
+    workspace={config.workspace}
+    cookiejars={config.cookiejars}
+    {env} />
+</section>
