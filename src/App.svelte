@@ -7,6 +7,7 @@
 
   let envId = 0;
   $: env = config.environments[envId];
+  $: color = env.color;
   $: requests = applyEnvForObject(config.requests, config.environments[envId]);
   $: groups = applyEnvForObject(config.groups, config.environments[envId]);
 
@@ -108,7 +109,7 @@
   <title>{config.workspace.name}</title>
 </svelte:head>
 
-<header style="border-top: 6px solid {env.color};">
+<header style="border-top: 6px solid {color !== null ? color : 'transparent'};">
   <div class="header-left">
     <a href="javascript:;" class="hamburger-toggler" on:click={toggleHamburger}>
       <i class="fa fa-bars" />
