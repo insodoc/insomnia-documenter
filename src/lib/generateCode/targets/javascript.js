@@ -74,8 +74,8 @@ export default function javascript(url, req) {
     code = code.replace('"{{formVariable}}"', 'form');
   }
 
-  code += ')\n  .then(response => console.log(response))\n';
-  code += '  .catch(err => console.error(err));';
+  code += ')\n  .then(console.log)\n';
+  code += '  .catch(console.error);';
 
   return code;
 };
