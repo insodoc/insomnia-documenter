@@ -86,7 +86,7 @@ class ContentGenerator {
     this.req.headers.forEach(header => {
       rows.push({
         name: header.name,
-        value: formatEnv(header.value),
+        value: formatEnv(header.value || ''),
         description: header.description
       });
     });

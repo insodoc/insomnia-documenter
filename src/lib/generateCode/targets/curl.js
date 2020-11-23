@@ -5,11 +5,11 @@ export default function curl(url, req) {
   let code = `curl "${buildUrl(url, req)}" \\\n`;
 
   req.headers.forEach(header => {
-    code += `  -H '${header.name}: ${header.value}' \\\n`;
+    code += `  -H '${header.name}: ${header.value || ''}' \\\n`;
   });
 
   if (req.authHeader) {
-    code += `  -H '${req.authHeader.name}: ${escape(req.authHeader.value)}' \\\n`;
+    code += `  -H '${req.authHeader.name}: ${escape(req.authHeader.value || '')}' \\\n`;
   }
 
   code += `  -X ${req.method} \\\n`;
