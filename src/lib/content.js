@@ -12,6 +12,7 @@ class BodyParser {
       return;
     }
 
+    this.body.text = this.body.text.replace(new RegExp('{{.*}}', 'g'), '"!!Missing declaration in environement!!"');
     const text = JSON.stringify(JSON.parse(this.body.text), null, 2);
 
     return {
@@ -56,7 +57,7 @@ class BodyParser {
         return this.__parsePlain();
     }
   }
-};
+}
 
 class ContentGenerator {
   constructor(req) {
@@ -125,6 +126,6 @@ class ContentGenerator {
         };
     }
   }
-};
+}
 
 export default ContentGenerator;
