@@ -22,6 +22,10 @@ export default function curl(url, req) {
 
   if (req.body && req.body.params && req.body.params.length) {
     req.body.params.forEach(param => {
+      if (param.value === null) {
+        return false;
+      }
+
       if (param.value.indexOf('\'') >= 0 && param.value.indexOf('"') >= 0) {
         code += `  -F "${param.name}=${param.value.replace('"', '\\"')}"`;
       } else if (param.value.indexOf('\'') >= 0) {

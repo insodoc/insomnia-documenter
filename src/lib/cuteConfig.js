@@ -97,6 +97,6 @@ class CuteConfig {
 
     return this.cute;
   }
-};
+}
 
 export default CuteConfig;
