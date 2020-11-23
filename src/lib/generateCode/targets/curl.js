@@ -22,7 +22,16 @@ export default function curl(url, req) {
 
   if (req.body && req.body.params && req.body.params.length) {
     req.body.params.forEach(param => {
-      code += `  -F '${param.name}=${param.value}' \\\n`;
+      if (param.value.indexOf('\'') >= 0 && param.value.indexOf('"') >= 0) {
+        code += `  -F "${param.name}=${param.value.replace('"', '\\"')}"`;
+      } else if (param.value.indexOf('\'') >= 0) {
+        code += `  -F "${param.name}=${param.value}"`;
+      } else if (param.value.indexOf('"') >= 0) {
+        code += `  -F '${param.name}=${param.value}'`;
+      } else {
+        code += `  -F '${param.name}=${param.value}'`;
+      }
+      code += ' \\\n';
     });
   }
 
