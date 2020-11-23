@@ -1,28 +1,29 @@
-import escape from '../helpers/escape';
-
 function parseBody(body) {
   const mime = body.mimeType;
 
   if (mime === 'application/x-www-form-urlencoded') {
-    return body.params.map(p => `${encodeURIComponent(p.name)}=${encodeURIComponent(p.value)}`).join('&');
+    return `payload = ${body.params.map(p => `${encodeURIComponent(p.name)}=${encodeURIComponent(p.value)}`).join('&')}`;
   }
 
   if (mime === 'multipart/form-data') {
-    const boundary = '-----011000010111000001101001'; // api :)
-    const payload = body.params.map(p => {
-      return `${boundary}
-Content-Disposition: form-data; name="${p.name}"
+    const payload = {};
+    const files = {};
+    body.params.forEach(p => {
+      if (p.type === 'file') {
+        files[p.name] = p.value;
+      } else {
+        payload[p.name] = p.value;
+      }
+    });
 
-${p.value}`;
-    }).join('\n');
-    return `${escape(payload)}\n${boundary}--`;
+    return `payload = ${JSON.stringify(payload, null, 2)}\n\nfiles = ${JSON.stringify(files, null, 2)}`;
   }
 
   if (mime === 'application/json' && body.text) {
-    return JSON.stringify(JSON.parse(body.text), null, 2);
+    return `payload = ${JSON.stringify(JSON.parse(body.text), null, 2)}`;
   }
 
-  return body.text;
+  return `payload = ${body.text}`;
 }
 
 export default function python(url, req) {
@@ -54,15 +55,15 @@ export default function python(url, req) {
   }
 
   if (headers) {
-    code += `headers = ${JSON.stringify(headers, null, 4)}\n`;
+    code += `headers = ${JSON.stringify(headers, null, 2)}\n`;
   }
 
   const payload = parseBody(req.body);
   if (payload) {
-    code += `payload = '${payload}'\n`;
+    code += `${payload}\n`;
   }
 
-  code += `\nresponse = requests.request('${req.method}', url, data=payload, headers=headers)\n`;
+  code += `\nresponse = requests.request('${req.method}', url, data=payload, headers=headers, files=files)\n`;
   code += 'print(response.text)';
 
   return code;

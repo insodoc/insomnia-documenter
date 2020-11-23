@@ -70,6 +70,6 @@ class CodeGenerator {
 
     return cookies;
   }
-};
+}
 
 export default (request, url, language, cookiejars) => new CodeGenerator(request, url, cookiejars).generate(language);
