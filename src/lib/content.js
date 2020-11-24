@@ -12,6 +12,7 @@ class BodyParser {
       return;
     }
 
+    this.body.text = this.body.text.replace(new RegExp('{{.*}}', 'g'), '"!!Missing declaration in environment!!"');
     const text = JSON.stringify(JSON.parse(this.body.text), null, 2);
 
     return {
@@ -56,7 +57,7 @@ class BodyParser {
         return this.__parsePlain();
     }
   }
-};
+}
 
 class ContentGenerator {
   constructor(req) {
@@ -86,7 +87,7 @@ class ContentGenerator {
     this.req.headers.forEach(header => {
       rows.push({
         name: header.name,
-        value: formatEnv(header.value),
+        value: formatEnv(header.value || ''),
         description: header.description
       });
     });
@@ -125,6 +126,6 @@ class ContentGenerator {
         };
     }
   }
-};
+}
 
 export default ContentGenerator;

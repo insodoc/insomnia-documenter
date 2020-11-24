@@ -5,11 +5,11 @@ export default function curl(url, req) {
   let code = `curl "${buildUrl(url, req)}" \\\n`;
 
   req.headers.forEach(header => {
-    code += `  -H '${header.name}: ${header.value}' \\\n`;
+    code += `  -H '${header.name}: ${header.value || ''}' \\\n`;
   });
 
   if (req.authHeader) {
-    code += `  -H '${req.authHeader.name}: ${escape(req.authHeader.value)}' \\\n`;
+    code += `  -H '${req.authHeader.name}: ${escape(req.authHeader.value || '')}' \\\n`;
   }
 
   code += `  -X ${req.method} \\\n`;
@@ -22,7 +22,20 @@ export default function curl(url, req) {
 
   if (req.body && req.body.params && req.body.params.length) {
     req.body.params.forEach(param => {
-      code += `  -F '${param.name}=${param.value}' \\\n`;
+      if (param.value === null) {
+        return false;
+      }
+
+      if (param.value.indexOf('\'') >= 0 && param.value.indexOf('"') >= 0) {
+        code += `  -F "${param.name}=${param.value.replace('"', '\\"')}"`;
+      } else if (param.value.indexOf('\'') >= 0) {
+        code += `  -F "${param.name}=${param.value}"`;
+      } else if (param.value.indexOf('"') >= 0) {
+        code += `  -F '${param.name}=${param.value}'`;
+      } else {
+        code += `  -F '${param.name}=${param.value}'`;
+      }
+      code += ' \\\n';
     });
   }
 

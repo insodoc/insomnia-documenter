@@ -13,6 +13,6 @@
     <Request request={row} {env} {language} {cookiejars} />
   {:else}
     <Group group={row} {env} />
-    <svelte:self content={[ ...row.requests, ...row.children ]} {env} {language} {cookiejars} />
+    <svelte:self content={[...row.requests, ...row.children]} {env} {language} {cookiejars} />
   {/if}
 {/each}

@@ -18,7 +18,7 @@
 
   let menuVisible = false;
   let exampleVisible =
-    (localStorage.getItem("show-examples") || "true") == "true";
+    (localStorage.getItem('show-examples') || 'true') === 'true';
 
   function toggleHamburger() {
     menuVisible = !menuVisible;
@@ -26,7 +26,7 @@
 
   function toggleExample() {
     exampleVisible = !exampleVisible;
-    localStorage.setItem("show-examples", exampleVisible);
+    localStorage.setItem('show-examples', exampleVisible);
   }
 </script>
 
@@ -111,8 +111,8 @@
 
 <header style="border-top: 6px solid {color !== null ? color : '#6a57d5'};">
   <div class="header-left">
-    <a href="javascript:;" class="hamburger-toggler" on:click={toggleHamburger}>
-      <i class="fa fa-bars" />
+    <a href="javascript:" class="hamburger-toggler" on:click={toggleHamburger}>
+      <i class="fa fa-bars" aria-hidden="true"></i>
     </a>
 
     <div class="logo">
@@ -128,8 +128,8 @@
       </a>
     </div>
     <div class="environment">
-      <span>Environment:</span>
-      <select bind:value={envId}>
+      <label for="env" style="display:inline-block;">Environment:</label>
+      <select id="env" bind:value={envId}>
         {#each config.environments as environment, idx}
           <option value={idx}>{environment.name}</option>
         {/each}
@@ -141,7 +141,7 @@
       class:inactive={!exampleVisible}
       on:click={toggleExample}
       title="Toggle request examples">
-      <i class="fa fa-code" />
+      <i class="fa fa-code" aria-hidden="true"></i>
     </a>
   </div>
 </header>

@@ -17,8 +17,7 @@
 <style>
   .error-page {
     width: 760px;
-    margin: 0 auto;
-    margin-top: 60px;
+    margin: 60px auto 0;
   }
 
   @media only screen and ( max-width: 760px ) {
