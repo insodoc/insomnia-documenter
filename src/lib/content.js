@@ -12,7 +12,7 @@ class BodyParser {
       return;
     }
 
-    this.body.text = this.body.text.replace(new RegExp('{{.*}}', 'g'), '"!!Missing declaration in environement!!"');
+    this.body.text = this.body.text.replace(new RegExp('{{.*}}', 'g'), '"!!Missing declaration in environment!!"');
     const text = JSON.stringify(JSON.parse(this.body.text), null, 2);
 
     return {
