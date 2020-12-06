@@ -4,7 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.4.2 - 2020-10-05
+## 0.4.4 - 2020-12-06
+### Fixed
+- Escaping in Python generator (thanks to @Psychokiller1888)
+- Escaping in curl generator (thanks to @Psychokiller1888)
+- Handle empty body values (thanks to @Psychokiller1888)
+- Handle empty header values (thanks to @Psychokiller1888)
+
+### Changed
+- Bumped highlight.js to 10.4.1
+
+## 0.4.3 - 2020-10-05
 ### Added
 - Table of Contents in the README
 - Notice about the [Insomnia Plugin](https://insomnia.rest/plugins/insomnia-plugin-documenter) by @devhammed
