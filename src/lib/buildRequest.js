@@ -1,31 +1,46 @@
-import pick from 'lodash.pick';
+import pick from 'lodash.pick'
 
-const reExampleResponse = /<!--(?:\s+)?RESPONSE(?:\s+)((?:\d){3})?(?:\s+)?-->\n(.|\n)*?<!--(?:\s+)?ENDRESPONSE(?:\s+)?-->/gm;
+const reExampleResponse = /```response(:(\d+))?\n([\s\S]*?)\n```/gm
 
-function makeExampleResponse(match) {
-  const code = match[1] || null;
-  const value = match[0].slice(match[0].indexOf('>') + 1, match[0].lastIndexOf('<')).trim();
+function makeExampleResponse (match) {
+  const code = match[2] || null
+  const value = match[3].trim()
 
-  return { code, value };
+  return { code, value }
 }
 
 export default function (requestData) {
-  requestData = pick(requestData, '_id', 'method', 'name', 'description', 'parameters', 'url', 'authentication', 'body', 'headers', '_type');
+  requestData = pick(
+    requestData,
+    '_id',
+    'method',
+    'name',
+    'description',
+    'parameters',
+    'url',
+    'authentication',
+    'body',
+    'headers',
+    '_type'
+  )
 
   if (!requestData.description) {
-    return requestData;
+    return requestData
   }
 
-  const exampleResponses = [];
+  const exampleResponses = []
 
-  let match;
-  // eslint-disable-next-line no-cond-assign
-  while (match = reExampleResponse.exec(requestData.description)) {
-    exampleResponses.push(makeExampleResponse(match));
+  let match
+
+  while ((match = reExampleResponse.exec(requestData.description))) {
+    exampleResponses.push(makeExampleResponse(match))
   }
 
-  requestData.exampleResponses = exampleResponses;
-  requestData.description = requestData.description.replace(reExampleResponse, '');
+  requestData.exampleResponses = exampleResponses
+  requestData.description = requestData.description.replace(
+    reExampleResponse,
+    ''
+  )
 
-  return requestData;
+  return requestData
 }
