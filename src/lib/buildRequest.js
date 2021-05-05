@@ -1,12 +1,12 @@
-import pick from 'lodash.pick'
+import pick from 'lodash.pick';
 
-const reExampleResponse = /```response(:(\d+))?\n([\s\S]*?)\n```/gm
+const reExampleResponse = /```response(:(\d+))?\n([\s\S]*?)\n```/gm;
 
-function makeExampleResponse (match) {
-  const code = match[2] || null
-  const value = match[3].trim()
+function makeExampleResponse(match) {
+  const code = match[2] || null;
+  const value = match[3].trim();
 
-  return { code, value }
+  return { code, value };
 }
 
 export default function (requestData) {
@@ -22,25 +22,25 @@ export default function (requestData) {
     'body',
     'headers',
     '_type'
-  )
+  );
 
   if (!requestData.description) {
-    return requestData
+    return requestData;
   }
 
-  const exampleResponses = []
+  const exampleResponses = [];
 
-  let match
+  let match;
 
   while ((match = reExampleResponse.exec(requestData.description))) {
-    exampleResponses.push(makeExampleResponse(match))
+    exampleResponses.push(makeExampleResponse(match));
   }
 
-  requestData.exampleResponses = exampleResponses
+  requestData.exampleResponses = exampleResponses;
   requestData.description = requestData.description.replace(
     reExampleResponse,
     ''
-  )
+  );
 
-  return requestData
+  return requestData;
 }
