@@ -1,5 +1,5 @@
-import buildRequest from './buildRequest';
 import { expect } from 'chai';
+import buildRequest from './buildRequest';
 
 describe('buildRequest', function () {
   beforeEach(function () {
@@ -13,7 +13,7 @@ describe('buildRequest', function () {
       authentication: null,
       body: null,
       headers: null,
-      _type: 'request'
+      _type: 'request',
     };
   });
 
@@ -24,21 +24,21 @@ describe('buildRequest', function () {
   describe('example responses', function () {
     beforeEach(function () {
       const description = `This is an example:
-<!-- RESPONSE -->
-no status code
-<!-- ENDRESPONSE -->
+\`\`\`response
+  no status code
+\`\`\`
 
 more text goes here
 
-<!-- RESPONSE 200 -->
+\`\`\`response:200
 response 200
-<!-- ENDRESPONSE -->
+\`\`\`
 
 even more text
 
-<!--RESPONSE 404    -->
-response 404
-<!--      ENDRESPONSE    -->`;
+\`\`\`response:404
+  response 404
+\`\`\``;
 
       this.exampleResponseDummy = { ...this.dummy, description };
     });
@@ -58,7 +58,9 @@ response 404
 
     it('should remove example responses from the description', function () {
       const request = buildRequest(this.exampleResponseDummy);
-      return expect(request.description).to.eql('This is an example:\n\n\nmore text goes here\n\n\n\neven more text\n\n');
+      return expect(request.description).to.eql(
+        'This is an example:\n\n\nmore text goes here\n\n\n\neven more text\n\n'
+      );
     });
 
     it('should return null for example response code if it was not provided', function () {
@@ -66,7 +68,7 @@ response 404
       return expect(request.exampleResponses[0].code).to.be.null;
     });
 
-    it('should return correct status codes when provided', function() {
+    it('should return correct status codes when provided', function () {
       const request = buildRequest(this.exampleResponseDummy);
       expect(request.exampleResponses[1].code).to.eql('200');
       return expect(request.exampleResponses[2].code).to.eql('404');
@@ -74,8 +76,13 @@ response 404
 
     it('should return correct example', function () {
       const request = buildRequest(this.exampleResponseDummy);
-      const values = request.exampleResponses.map(ex => ex.value);
-      return expect(values).to.deep.eql([ 'no status code', 'response 200', 'response 404' ]);
+      const values = request.exampleResponses.map((ex) => ex.value);
+
+      return expect(values).to.deep.eql([
+        'no status code',
+        'response 200',
+        'response 404',
+      ]);
     });
   });
 });
