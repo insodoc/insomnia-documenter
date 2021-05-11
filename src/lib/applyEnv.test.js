@@ -15,6 +15,19 @@ describe('applyEnv', function () {
     );
   });
 
+  it('should replace the env vars with root underscores', function () {
+    const env = {
+      data: {
+        url: 'http://localhost',
+        method: 'GET'
+      }
+    };
+
+    return expect(applyEnv('The url is {{_.url}} and the method is {{ _.method }}', env)).to.eql(
+      'The url is http://localhost and the method is GET'
+    );
+  });
+
   it('should handle multiple spaces correctly', function () {
     const env = {
       data: {
@@ -22,6 +35,6 @@ describe('applyEnv', function () {
       }
     };
 
-    return expect(applyEnv('foo is {{    foo  }}', env)).to.eql('foo is bla');
+    return expect(applyEnv('foo is {{    foo  }} and {{    _.foo }}', env)).to.eql('foo is bla and bla');
   });
 });
