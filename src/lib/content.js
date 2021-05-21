@@ -13,7 +13,14 @@ class BodyParser {
     }
 
     this.body.text = this.body.text.replace(new RegExp('{{.*}}', 'g'), '"!!Missing declaration in environment!!"');
-    const text = JSON.stringify(JSON.parse(this.body.text), null, 2);
+    let text;
+
+    try {
+      text = JSON.stringify(JSON.parse(this.body.text), null, 2);
+    } catch (_) {
+      console.warn('Failed to parse JSON body (expect incorrect tokenization):', this.body.text);
+      text = this.body.text;
+    }
 
     return {
       type: 'plain',
