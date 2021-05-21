@@ -2,9 +2,9 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
 import replace from 'rollup-plugin-replace';
 import autoPreprocess from 'svelte-preprocess';
+import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -23,12 +23,12 @@ export default {
       // we'll extract any component CSS out into
       // a separate file — better for performance
       css: css => {
-        css.write('public/bundle.css');
+        css.write('bundle.css');
       },
-      
+
       preprocess: autoPreprocess()
     }),
-    
+
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration —
@@ -43,11 +43,11 @@ export default {
     replace({
       'process.env': JSON.stringify(process.env)
     }),
-    
+
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
     !production && livereload('public'),
-    
+
     // If we're building for production (npm run build
     // instead of npm run dev), minify
     production && terser()
