@@ -13,4 +13,8 @@ describe('formatEnv', function () {
       'The url is <span class="env-variable">url</span> and <span class="env-variable">url</span>'
     );
   });
+
+  it('should return an empty string for null input parameter', function () {
+    return expect(formatEnv(null)).to.eql('');
+  });
 });
