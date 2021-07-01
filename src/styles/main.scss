@@ -202,6 +202,8 @@ button {
 }
 
 .description {
+  overflow-x: auto;
+
   code, pre {
     background: #eee;
     text-shadow: 0 1px #fff;
