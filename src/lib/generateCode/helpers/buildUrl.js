@@ -7,7 +7,7 @@ export default function parseUrlWithParams(url, req) {
 
   url = `${url}?`;
 
-  url += params.map(param => {
+  url += params.filter(param => !param.disabled).map(param => {
     return `${encodeURIComponent(param.name)}=${encodeURIComponent(param.value)}`;
   }).join('&');
 

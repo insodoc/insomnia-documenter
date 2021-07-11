@@ -23,7 +23,9 @@ function parseBody(body) {
     return `payload = ${JSON.stringify(JSON.parse(body.text), null, 2)}`;
   }
 
-  return `payload = ${body.text}`;
+  return body.text
+    ? `payload = '${body.text}'`
+    : null;
 }
 
 export default function python(url, req) {
@@ -63,7 +65,7 @@ export default function python(url, req) {
     code += `${payload}\n`;
   }
 
-  code += `\nresponse = requests.request('${req.method}', url, data=payload, headers=headers, files=files)\n`;
+  code += `\nresponse = requests.request('${req.method}', url, ${payload ? 'data = payload, ' : ''}headers=headers, files=files)\n`;
   code += 'print(response.text)';
 
   return code;
