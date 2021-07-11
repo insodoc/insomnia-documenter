@@ -69,7 +69,7 @@
     "demo": "cross-env NODE_ENV=demo npm run build && cp -r public/bundle.* public/index.html docs/",
     "dev": "run-p start:dev autobuild",
     "lint": "eslint src --ignore-pattern *.test.js",
-    "prepack": "npm run build",
+    "prepack": "rm -rf public/*.json public/*.zip && npm run build",
     "start": "sirv public --single",
     "start:demo": "node bin/demo",
     "start:dev": "sirv public --single --dev",
