@@ -13,30 +13,34 @@
 </script>
 
 {#if !root}
-<a href="javascript:;" class="sidebar-list-link name" class:expanded on:click={toggle}>
-  <span>{name}</span>
-</a>
+  <span class="sidebar-list-link name" class:expanded on:click={toggle}>
+    <span>{name}</span>
+  </span>
 {/if}
 
 {#if expanded}
   <ul>
     {#each children as child}
-    <li class="folder"><svelte:self {...child}></svelte:self></li>
+      <li class="folder"><svelte:self {...child} /></li>
     {/each}
     {#each requests as request}
-    <li class="request"><Request {request} /></li>
+      <li class="request"><Request {request} /></li>
     {/each}
   </ul>
 {/if}
 
 <style>
+  .sidebar-list-link {
+    cursor: pointer;
+  }
+
   .sidebar-list-link::before {
     font-family: FontAwesome;
-    content: "\f07b";
+    content: '\f07b';
   }
 
   .sidebar-list-link.expanded::before {
-    content: "\f07c";
+    content: '\f07c';
   }
 
   ul {
