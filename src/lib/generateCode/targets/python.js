@@ -2,30 +2,30 @@ function parseBody(body) {
   const mime = body.mimeType;
 
   if (mime === 'application/x-www-form-urlencoded') {
-    return `payload = ${body.params.map(p => `${encodeURIComponent(p.name)}=${encodeURIComponent(p.value)}`).join('&')}`;
+      return `payload = ${body.params.map(p => `${encodeURIComponent(p.name)}=${encodeURIComponent(p.value)}`).join('&')}`;
   }
 
   if (mime === 'multipart/form-data') {
-    const payload = {};
-    const files = {};
-    body.params.forEach(p => {
-      if (p.type === 'file') {
-        files[p.name] = p.value;
-      } else {
-        payload[p.name] = p.value;
-      }
-    });
+      const payload = {};
+      const files = {};
+      body.params.forEach(p => {
+          if (p.type === 'file') {
+                files[p.name] = p.value;
+          } else {
+              payload[p.name] = p.value;
+          }
+      });
 
-    return `payload = ${JSON.stringify(payload, null, 2)}\n\nfiles = ${JSON.stringify(files, null, 2)}`;
+      return `payload = ${JSON.stringify(payload, null, 2)}\n\nfiles = ${JSON.stringify(files, null, 2)}`;
   }
 
   if (mime === 'application/json' && body.text) {
-    return `payload = ${JSON.stringify(JSON.parse(body.text), null, 2)}`;
+      return `payload = ${JSON.stringify(JSON.parse(body.text), null, 2)}\n\nfiles = null`;
   }
 
   return body.text
-    ? `payload = '${body.text}'`
-    : null;
+      ? `payload = '${body.text}\n\nfiles = null`
+      : 'files = null';
 }
 
 export default function python(url, req) {
