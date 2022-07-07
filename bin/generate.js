@@ -9,10 +9,11 @@ const mkdirp = require('mkdirp');
 program
   .option('-c, --config <location>', 'Location of the exported Insomnia JSON config.')
   .option('-l, --logo <location>', 'Project logo location (48x48px PNG).')
+  .option('-f, --favicon <location>', 'Project favicon location (ICO).')
   .option('-o, --output <location>', 'Where to save the file (defaults to current working directory).')
   .parse(process.argv);
 
-const { config, logo, output } = program;
+const { config, logo, favicon, output } = program;
 
 if (!config) {
   console.log('You must provide an exported Insomnia config (Preferences -> Data -> Export Data -> Current Workspace).');
@@ -22,6 +23,7 @@ if (!config) {
 const PACKAGE_DIST_PATH = path.resolve(__dirname, '..', 'public');
 const outputPath = output ? path.join(process.cwd(), output) : process.cwd();
 const logoPath = logo && path.join(process.cwd(), logo);
+const faviconPath = favicon && path.join(process.cwd(), favicon);
 const configPath = path.join(process.cwd(), config);
 
 console.log('Getting files ready...');
@@ -45,6 +47,11 @@ mkdirp(outputPath, err => {
   if (logoPath) {
     console.log('Adding custom logo...');
     fs.copyFileSync(logoPath, path.join(outputPath, 'logo.png'));
+  }
+
+  if (faviconPath) {
+    console.log('Adding custom favicon...');
+    fs.copyFileSync(faviconPath, path.join(outputPath, 'favicon.ico'));
   }
 
   console.log('\n * * * Done! * * *\nYour documentation has been created and it\'s ready to be deployed!');
