@@ -20,12 +20,12 @@ function parseBody(body) {
   }
 
   if (mime === 'application/json' && body.text) {
-    return `payload = ${JSON.stringify(JSON.parse(body.text), null, 2)}`;
+    return `payload = ${JSON.stringify(JSON.parse(body.text), null, 2)}\n\nfiles = null`;
   }
 
   return body.text
-    ? `payload = '${body.text}'`
-    : null;
+    ? `payload = '${body.text}'\n\nfiles = null`
+    : 'files = null';
 }
 
 export default function python(url, req) {
