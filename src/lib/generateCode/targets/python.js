@@ -24,7 +24,7 @@ function parseBody(body) {
   }
 
   return body.text
-    ? `payload = '${body.text}\n\nfiles = null`
+    ? `payload = '${body.text}'\n\nfiles = null`
     : 'files = null';
 }
 
