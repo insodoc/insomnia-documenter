@@ -38,11 +38,11 @@ curl_setopt_array($curl, array(
   }
 
   if (req.authHeader) {
-    headers.push(`${req.authHeader.name}: ${req.authHeader.value}`);
+    headers.push(`'${req.authHeader.name}: ${req.authHeader.value}'`);
   }
 
   if (headers.length) {
-    opts.push(`CURLOPTS_HTTPHEADER => array(
+    opts.push(`CURLOPT_HTTPHEADER => array(
     ${headers.join(',\n    ')}
   )`);
   }
