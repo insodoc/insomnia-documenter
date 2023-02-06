@@ -7,12 +7,13 @@ Like [Postman Documenter](https://www.getpostman.com/api-documentation-generator
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
   - [Using `npx`](#using-npx)
   - [By installing the package globally](#by-installing-the-package-globally)
   - [Options](#options)
-  - [Using a GitHub Release](#using-a-github-release)
+  - [Using a GitHub release](#using-a-github-release)
 - [Updating the API](#updating-the-api)
 - [Custom Root Paths](#custom-root-paths)
 - [Running the Page Locally](#running-the-page-locally)
@@ -49,6 +50,7 @@ insomnia-documenter --config /path/to/insomnia/config.json
 Options:
   -c, --config <location>  Location of the exported Insomnia JSON config.
   -l, --logo <location>    Project logo location (48x48px PNG).
+  -f, --favicon <location>    Project favicon location (ICO).
   -o, --output <location>  Where to save the file (defaults to current working directory).
   -h, --help               output usage information
 ```
@@ -61,7 +63,7 @@ Alternatively, you can start using Insomnia Documenter by downloading a release 
 
 Updating the API is super simple! Since Insomnia Documenter is a plug-and-play web app, you can just replace your `insomnia.json` with your new exported JSON file. Just make sure it's called `insomnia.json`.
 
-The same actually applies to the logo as well (`logo.png`).
+The same actually applies to the logo (`logo.png`) e favicon (`favicon.ico`) as well .
 
 ## Custom Root Paths
 
