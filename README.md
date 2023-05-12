@@ -2,7 +2,7 @@
 
 Like [Postman Documenter](https://www.getpostman.com/api-documentation-generator) but for [Insomnia](https://insomnia.rest)! With this tool you can generate beautiful API documentation pages using your Insomnia export file.
 
-**Demo: https://jozsefsallai.github.io/insomnia-documenter**<br>
+**Demo: https://insodoc.github.io/insomnia-documenter/**<br>
 **Tutorial and demo video: https://www.youtube.com/watch?v=pq2u3FqVVy8**
 
 ## Table of Contents
